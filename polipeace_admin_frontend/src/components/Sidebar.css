@@ -21,6 +21,9 @@
 
 .sidebar-header h2 {
   text-align: center;
+  letter-spacing: 1.5px;
+  transform: scale(1.1);
+  font-weight: 550;
 }
 
 .sidebar-links ul {
@@ -50,6 +53,7 @@
   font-weight: 600;
   background-color: transparent;
   transition: 0.4s all;
+  padding-left: 40px;
 }
 
 .sidebar-links a::after {
@@ -77,5 +81,5 @@
 
 .sidebar-footer {
   text-align: center;
-  font-size: 14px;
+  font-size: .95em;
 }
