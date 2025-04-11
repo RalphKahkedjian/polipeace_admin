@@ -22,9 +22,7 @@ export default function Registration() {
               <input type='email' placeholder='Enter your email' />
               <input type='password' placeholder='Enter your password' />
               <input type='number' placeholder='Enter your age' />
-            </div>
-          </div>
-          <div className='mt-5'>
+              <div className='mt-5'>
           <Button
             width={180}
             height = {48}
@@ -37,6 +35,16 @@ export default function Registration() {
             onMouseEnter={()=> setIsHovered(true)}
             onMouseLeave={()=> setIsHovered(false)}
           />
+          </div>
+            </div>
+          </div>
+          <div style={{
+            position:'absolute',
+            bottom:'0px',
+            fontSize:'.8em',
+            color:'#642C4B'
+          }}>
+            <p>&copy; Ralph Kahkedjian 2025</p>
           </div>
         </div>
         <div className='registration-bg'>
