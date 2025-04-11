@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.registration-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration-form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  font-size: 1.2em;
+  letter-spacing: 1.2px;
+  text-align: left;
+  padding: 50px;
+  height: 100%;
+}
+
+.registration-bg {
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  height: 100%;
+}
+
+.registration-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+.registration-form h1 {
+  font-weight: 200;
+  color: #642C4B;
+}
+
+.registration-input-field {
+  display: block;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.registration-input-field input {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #642C4B;
+  max-width: 500px;
+  margin-top: 45px;
+  padding: 12px;
+  border-radius: 1px;
+  font-size: 1em;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 1250px) {
+  .registration-bg {
+    display: none;
+  }
+  
+  .registration-form {
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+
+  .registration-input-field input {
+    width: 90%;
+  }
+}

@@ -1,11 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
+import Registration from './views/Registration';
 
 function App() {
   return (
     <>
-    <Sidebar />
+    <Registration />
     </>
   )
 }
