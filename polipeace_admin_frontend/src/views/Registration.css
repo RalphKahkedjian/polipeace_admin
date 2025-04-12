@@ -81,7 +81,23 @@
     text-align: center;
   }
 
+  .registration-form {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70%;
+    font-size: 1em;
+    letter-spacing: 1.2px;
+    text-align: left;
+    padding: 50px;
+    height: 100%;
+  }
+
+  .registration-input-field {
+    width: 100%;
+  }
+  
   .registration-input-field input {
-    width: 90%;
+    width: 100%;
   }
 }

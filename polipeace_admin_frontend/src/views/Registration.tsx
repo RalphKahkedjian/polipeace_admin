@@ -8,7 +8,7 @@ export default function Registration() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className='registration-container'>
+    <div className='registration-container w-100'>
       <div className='d-flex'>
         <div className='registration-form'>
           <div className='d-block'>
@@ -28,7 +28,7 @@ export default function Registration() {
             height = {48}
             text='Register'
             color= {isHovered ? '#642C4B' : '#F3ECEF'} 
-            backgroundColor= {isHovered ? '#F3ECEF' : '#642C4B'}
+            backgroundColor= {isHovered ? 'white' : '#642C4B'}
             borderRadius='8px'
             border='2px solid #642C4B'
             paddingTop={8}
