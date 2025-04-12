@@ -31,7 +31,7 @@ export default function Button({width, height, text, color, backgroundColor, bor
     }}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
-    onClick={()=> onClick}
+    onClick={()=> onClick?.()}
     
     >
       {text}
