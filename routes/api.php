@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/Admin/Register', [AdminController::class, 'register']);
+Route::get('/Admin/Admins', [AdminController::class, 'getAdmins']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

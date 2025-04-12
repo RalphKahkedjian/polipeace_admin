@@ -17,6 +17,7 @@ class AdminController extends Controller
          * @var \App\Models\Admin
          */
         $admin = new Admin();
+        $admin->id = $request->get('id');
         $admin->username = $request->get('username');
         $admin->email = $request->get('email');
         $admin->password = Hash::make($request->get('password'));
@@ -28,6 +29,7 @@ class AdminController extends Controller
             "status" => true,
             "message" => "Admin Registered Successfully",
             "admin" => [
+                "id" => $admin->id,
                 "username" => $admin->username,
                 "email" => $admin->email,
                 "age" => $admin->age,
@@ -37,4 +39,21 @@ class AdminController extends Controller
     }
 
     // Login function TBD
+
+    // Get function 
+    public function getAdmins() {
+        $admins = Admin::all();
+    
+        if (!$admins->isEmpty()) {
+            return response()->json([
+                "status" => true,
+                "admins" => $admins
+            ]);
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => "Admins list is empty"
+            ]);
+        }
+    }    
 }
