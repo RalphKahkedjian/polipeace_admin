@@ -1,12 +1,18 @@
 import { useRef, useState } from 'react';
 import AuthBackgroundImage from '../assets/images/Login.png';
 import Button from '../components/Button';
-import '../views/Registration.css';
+import '../views/AuthForm.css';
 import axiosClient from '../axiosClient';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { useStateContext } from '../contexts/contextProvider';
 
 
 export default function Login() {
+
+  const navigate = useNavigate()
+  const {setUser, setToken} = useStateContext()
+
   const [isHovered, setIsHovered] = useState(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -20,13 +26,15 @@ export default function Login() {
       password: passwordRef.current?.value,
     };
     console.log(payload);
-
     axiosClient.post('/Admin/Login', payload)
     .then(({data})=> {
       console.log(data.admin.username)
       console.log(data.admin.email)
       console.log(data.admin.age)
       console.log(data.token)
+      setUser(data.admin.username)
+      setToken(data.token)
+      navigate('/');
     })
     .catch(err=> {
       const response = err.response;
@@ -35,7 +43,7 @@ export default function Login() {
   };
 
   return (
-    <div className='auth-container w-100'>
+    <div className='auth-container w-100 '>
     <div className='d-flex'>
       <div className='auth-form'>
         <div className='d-block'>
@@ -59,6 +67,9 @@ export default function Login() {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={registerUser}
               />
+              <p className='mt-2' style={{fontSize:'.8em'}}>
+                Don't have an account? <Link to='/register'> <span style={{color:'black', textDecoration:'underline'}}>Register</span></Link>
+              </p>
             </div>
           </div>
         </div>

@@ -70,6 +70,79 @@
   color: #642C4B;
 }
 
+.button-outlet {
+  width: 190px;
+  height: 55px;
+  background-color: #642C4B;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 1.3px solid whitesmoke;
+  overflow: hidden;
+}
+
+.button-outlet-inside {
+  width: 40px;
+  height: 55px;
+  background-color: whitesmoke;
+  position: absolute;
+  right: 0%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.button-outlet:hover .button-outlet-inside {
+  width: 190px;
+}
+
+.button-outlet {
+  width: 190px;
+  height: 55px;
+  background-color: #642C4B;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 1.3px solid whitesmoke;
+  overflow: hidden;
+
+}
+
+/* default inner size */
+.button-outlet-inside {
+  width: 40px;
+  height: 55px;
+  background-color: whitesmoke;
+  position: absolute;
+  right: 0%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s ease;
+}
+
+.button-outlet:hover .button-outlet-inside {
+  width: 50px;
+}
+
+.button-outlet-inside img {
+  width: 30px;
+  height: 30px;
+}
+
+
 @media screen and (max-width: 1250px) {
   .auth-bg {
     display: none;

@@ -24,7 +24,7 @@ interface ContextProviderProps {
 // 4. Implement the provider
 export const ContextProvider = ({ children }: ContextProviderProps) => {
   const [user, setUser] = useState<any>(null);
-  const [token, _setToken] = useState<string | null>(null);
+  const [token, _setToken] = useState<string | null>(localStorage.getItem('access_token'));
 
   debugger;
   

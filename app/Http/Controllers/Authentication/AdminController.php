@@ -54,7 +54,8 @@ class AdminController extends Controller
                     "username" => $admin->username,
                     "email" => $admin->email,
                     "age" => $admin->age
-                ]
+                ],
+                "token" => $accessToken
             ]);
         }
 

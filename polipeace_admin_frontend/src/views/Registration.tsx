@@ -1,12 +1,18 @@
 import { useRef, useState } from 'react';
 import AuthBackgroundImage from '../assets/images/Login.png';
 import Button from '../components/Button';
-import '../views/Registration.css';
+import '../views/AuthForm.css';
 import axiosClient from '../axiosClient';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { useStateContext } from '../contexts/contextProvider';
 
 
 export default function Registration() {
+
+  const navigate = useNavigate()
+  const {setUser,setToken} = useStateContext()
+
   const [isHovered, setIsHovered] = useState(false);
 
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -31,6 +37,10 @@ export default function Registration() {
       console.log(data.admin.email)
       console.log(data.admin.age)
       console.log(data.token)
+      
+      setUser(data.admin.username)
+      setToken(data.token)
+      navigate('/')
     })
     .catch(err=> {
       const response = err.response;
@@ -65,6 +75,9 @@ export default function Registration() {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={registerUser}
               />
+              <p className='mt-2' style={{fontSize:'.8em'}}>
+                Already have an account? <Link to='/login'> <span style={{color:'black', textDecoration:'underline'}}>Login</span></Link>
+              </p>
             </div>
           </div>
         </div>
