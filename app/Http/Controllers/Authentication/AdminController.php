@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequests\AdminAuthLoginRequest;
 use App\Http\Requests\AdminRequests\AdminAuthRequest;
 use App\Models\Admin;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -39,7 +41,28 @@ class AdminController extends Controller
     }
 
     // Login function TBD
+    public function login(AdminAuthLoginRequest $request) {
+        $credentials = $request->validated();
 
+        $admin = Admin::where('email', $credentials['email'])->first();
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            $accessToken = $admin->createToken('access_token')->plainTextToken;
+            return response()->json([
+                "status" => true,
+                "message" => "Welcome back $admin->username",
+                "admin" => [
+                    "username" => $admin->username,
+                    "email" => $admin->email,
+                    "age" => $admin->age
+                ]
+            ]);
+        }
+
+        return response()->json([
+            "status" => false,
+            "message" => "Invalid email or password"
+        ]);
+    }
     // Get function 
     public function getAdmins() {
         $admins = Admin::all();
