@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { NavLink, NavLinkProps } from 'react-router-dom';
 import '../components/Sidebar.css';
 
 export default function Sidebar() {
-  const [activeLink, setActiveLink] = useState('Dashboard');
-
   const menuItems = [
-    'Dashboard', 'Posts', 'Votes', 'Announcements',
-    'Meetings', 'Users', 'Admins', 'Profile'
+    { name: 'Dashboard', path: '/' },
+    { name: 'Posts', path: '/posts' },
+    { name: 'Votes', path: '/votes' },
+    { name: 'Announcements', path: '/announcements' },
+    { name: 'Meetings', path: '/meetings' },
+    { name: 'Users', path: '/users' },
+    { name: 'Admins', path: '/admins' },
+    { name: 'Profile', path: '/profile' }
   ];
 
   return (
@@ -17,15 +21,16 @@ export default function Sidebar() {
 
       <div className="sidebar-links">
         <ul>
-          {menuItems.map(item => (
-            <li key={item}>
-              <a
-                href="#"
-                className={activeLink === item ? 'active' : ''}
-                onClick={() => setActiveLink(item)}
+          {menuItems.map(({ name, path }) => (
+            <li key={name}>
+              <NavLink
+                to={path}
+                className={({ isActive }: { isActive: boolean }) =>
+                  isActive ? 'active' : ''
+                }
               >
-                {item}
-              </a>
+                {name}
+              </NavLink>
             </li>
           ))}
         </ul>
