@@ -4,9 +4,19 @@ import Sidebar from '../components/Sidebar';
 import logouticon from  '../assets/images/logouticon.png'
 
 
-export default function DefaultLayout() {
-  const { token, setToken } = useStateContext();
+const getPageTitle =(pathname: string) => {
+  switch(pathname) {
+    case '/':
+      return 'Dashboard'
+    default:
+      return ''
+  }
+}
 
+export default function DefaultLayout() {
+  const { token, setToken, user } = useStateContext();
+  const titlePage = getPageTitle(location.pathname)
+  
   if (!token) {
     return <Navigate to="/login" />;
   }
@@ -18,12 +28,15 @@ export default function DefaultLayout() {
   return (
     <div>
       <Sidebar />
-      <div style={{ marginLeft: '260px' }}>
+      <div style={{ marginLeft: '260px', marginTop:'10px' }}>
         <Outlet />
+        <h3 className='mt-4'>
+          {titlePage}
+        </h3>
         <div style={{ position: 'absolute', right: '10px', top: '15px' }}>
           <div className="button-outlet" onClick={handleLogout}>
             <p className='pt-3' style={{letterSpacing:'1px', fontWeight:'500', marginRight:'30px'}}>
-              Logout
+              {user}
             </p>
             <div className="button-outlet-inside">
               <img src={logouticon} />

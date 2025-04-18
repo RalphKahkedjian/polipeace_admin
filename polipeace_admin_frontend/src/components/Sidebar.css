@@ -79,6 +79,37 @@
   transform-origin: left; 
 }
 
+
+.sidebar-links a.active {
+  color: #642C4B;
+  transform: scale(1.1);
+  border-radius: 25px;
+  font-weight: 600;
+  background-color: transparent;
+  padding-left: 40px;
+  position: relative; /* Needed for ::after */
+  z-index: 1;
+}
+
+.sidebar-links a.active::after {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  background-color: #F3ECEF;
+  color: #642C4B;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  top: 0;
+  left: 0;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
+  z-index: -1;
+  margin-left: 10px;
+}
+
+
 .sidebar-footer {
   text-align: center;
   font-size: .95em;

@@ -71,7 +71,8 @@
 }
 
 .button-outlet {
-  width: 190px;
+  width: auto;
+  padding: 25px;
   height: 55px;
   background-color: #642C4B;
   text-align: center;
@@ -105,20 +106,17 @@
   width: 190px;
   height: 55px;
   background-color: #642C4B;
-  text-align: center;
+  text-align: start;
   border-radius: 10px;
   color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   position: relative;
   border: 1.3px solid whitesmoke;
   overflow: hidden;
-
+  padding-right: 50px;
 }
 
-/* default inner size */
 .button-outlet-inside {
   width: 40px;
   height: 55px;

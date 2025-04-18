@@ -1,6 +1,14 @@
-import '../components/Sidebar.css'
+import { useState } from 'react';
+import '../components/Sidebar.css';
 
 export default function Sidebar() {
+  const [activeLink, setActiveLink] = useState('Dashboard');
+
+  const menuItems = [
+    'Dashboard', 'Posts', 'Votes', 'Announcements',
+    'Meetings', 'Users', 'Admins', 'Profile'
+  ];
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-header">
@@ -9,14 +17,17 @@ export default function Sidebar() {
 
       <div className="sidebar-links">
         <ul>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Posts</a></li>
-          <li><a href="#">Votes</a></li>
-          <li><a href="#">Announcements</a></li>
-          <li><a href="#">Meetings</a></li>
-          <li><a href="#">Users</a></li>
-          <li><a href="#">Admins</a></li>
-          <li><a href="#">Profile</a></li>
+          {menuItems.map(item => (
+            <li key={item}>
+              <a
+                href="#"
+                className={activeLink === item ? 'active' : ''}
+                onClick={() => setActiveLink(item)}
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -24,5 +35,5 @@ export default function Sidebar() {
         <p>&copy; Ralph Kahkedjian 2025</p>
       </div>
     </div>
-  )
+  );
 }
