@@ -7,6 +7,7 @@ import NotFound from "./views/NotFound";
 import Dashboard from "./views/Dashboard";
 import Admins from "./views/Admins";
 import Users from "./views/Users";
+import Profile from "./views/Profile";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'admins', element: <Admins /> },
-      { path: 'users', element: <Users /> }
+      { path: 'users', element: <Users /> },
+      { path: 'profile', element: <Profile />}
     ]
   },
   {

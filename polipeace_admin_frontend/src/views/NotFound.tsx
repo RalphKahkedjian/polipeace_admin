@@ -11,11 +11,9 @@ export default function NotFound() {
         transform:'translate(-50%,-50%)',
         textAlign:'center',
         color:'#642C4B',
-        fontWeight:'600',
-        fontSize:'2em',
         marginLeft:'80px'
       }}>
-        404 - Not Found 
+        <h1 className="display-3 fw-normal">404 - Not Found </h1>
         <p>
           The page you are looking for is not a valid one. 
           <br/>
