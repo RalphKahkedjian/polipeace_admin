@@ -18,14 +18,14 @@ return new class extends Migration
             $table->integer('age');
             $table->string('password');
             $table->enum('party_affiliation', [
-                'Ouwet', 
-                'Aoun', 
-                'Dashnak', 
-                'Kataeb', 
-                'Hezbollah', 
-                'Haraket Amal', 
-                'Marada Movement', 
-                'Progressive Socialist Party'
+                'ouwet', 
+                'aoun', 
+                'dashnak', 
+                'kataeb', 
+                'hezbollah', 
+                'haraket amal', 
+                'marada aovement', 
+                'progressive socialist party'
             ])->nullable();
             $table->rememberToken();
             $table->timestamps();
