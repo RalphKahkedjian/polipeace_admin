@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axiosClient";
+import { Admin } from "../models/Admin";
 
-interface Admin {
-  id: number;
-  username: string;
-  email: string;
-  age: number;
-}
+
 
 export default function Admins() {
   const [admins, setAdmins] = useState<Admin[]>([]);

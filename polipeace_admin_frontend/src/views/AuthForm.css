@@ -103,7 +103,7 @@
 }
 
 .button-outlet {
-  width: 190px;
+  width: 215px;
   height: 55px;
   background-color: #642C4B;
   text-align: start;
@@ -112,9 +112,10 @@
   display: flex;
   cursor: pointer;
   position: relative;
-  border: 1.3px solid whitesmoke;
+  border: none;
   overflow: hidden;
   padding-right: 50px;
+  box-shadow: 5px 5px 10px black;
 }
 
 .button-outlet-inside {

@@ -27,7 +27,8 @@ export default function Button({width, height, text, color, backgroundColor, bor
       border: border,
       textAlign:'center',
       cursor:'pointer',
-      transition:'all 0.3s ease-in'
+      transition:'all 0.3s ease-in',
+      boxShadow: '2px 2px 10px black'
     }}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}

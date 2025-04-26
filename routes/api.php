@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Admins' Routes
 Route::post('/Admin/Register', [AdminController::class, 'register']);
-Route::get('/Admin/Admins', [AdminController::class, 'getAdmins']);
 Route::post('/Admin/Login', [AdminController::class, 'login']);
+Route::get('/Admin/Admins', [AdminController::class, 'getAdmins']);
 
-Route::post('/User/Users', [UserController::class, 'register']);
+//Users' Routes
+Route::post('/User/Register', [UserController::class, 'register']);
+Route::post('/User/Login', [UserController::class, 'login']);
+Route::get('/User/Users', [UserController::class, 'getUsers']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
