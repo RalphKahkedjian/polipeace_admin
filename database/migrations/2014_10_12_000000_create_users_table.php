@@ -15,8 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->integer('age');
             $table->string('password');
+            $table->enum('party_affiliation', [
+                'Ouwet', 
+                'Aoun', 
+                'Dashnak', 
+                'Kataeb', 
+                'Hezbollah', 
+                'Haraket Amal', 
+                'Marada Movement', 
+                'Progressive Socialist Party'
+            ])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
