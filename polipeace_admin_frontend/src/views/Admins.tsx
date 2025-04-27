@@ -23,12 +23,7 @@ export default function Admins() {
   }, []);
 
   const filteredAdmins = admins.filter((admin) => {
-    const term = searchTerm.toLowerCase();
-    return (
-      admin.username.toLowerCase().includes(term) ||
-      admin.email.toLowerCase().includes(term) ||
-      admin.id.toString().includes(term)
-    );
+    admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase())
   });
 
   return (

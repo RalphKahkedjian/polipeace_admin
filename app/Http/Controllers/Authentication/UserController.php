@@ -17,7 +17,8 @@ class UserController extends Controller
         $user->email = $request->get('email');
         $user->age = $request->get('age');
         $user->password = Hash::make($request->get('password'));
-        $user->party_affiliation = strtolower($request->get('party_affiliation'));
+        $user->sex = $request->get('sex');
+        $user->party_affiliation = $request->get('party_affiliation');
         $user->save();
 
         $accessToken = $user->createToken('access_token')->plainTextToken;
@@ -28,7 +29,8 @@ class UserController extends Controller
                 "name" => $user->name,
                 "email" => $user->email,
                 "age" => $user->age,
-                "party_affiliation" => $user->polipartyAffiliation
+                "sex" => $user->sex,
+                "party_affiliation" => $user->party_affiliation
             ],
             "token" => $accessToken
         ]);
@@ -47,6 +49,7 @@ class UserController extends Controller
                     "name" => $user->name,
                     "email" => $user->email,
                     "age" => $user->age,
+                    "sex" => $user->gender,
                     "party_affiliation" => $user->polipartyAffiliation,
                 ],
                 "token" => $accessToken

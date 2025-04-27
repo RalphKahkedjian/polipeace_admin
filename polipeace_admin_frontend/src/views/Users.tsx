@@ -22,15 +22,10 @@ export default function Users() {
     getUsers();
   }, []);
 
-  const filteredUsers = users.filter((user) => {
-    const term = searchTerm.toLowerCase();
-    return (
-      user.name.toLowerCase().includes(term) ||
-      user.email.toLowerCase().includes(term) ||
-      user.id.toString().includes(term) ||
-      user.party_affiliation
-    );
-  });
+  const filteredUsers = users.filter((user) => 
+    user.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+  );
+  
 
   return (
     <div style={{ marginTop: '70px' }}>
@@ -56,7 +51,7 @@ export default function Users() {
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Age</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>party Affilation</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Party Affiliation</th>
           </tr>
         </thead>
         <tbody>

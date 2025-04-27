@@ -23,7 +23,8 @@ class UserAuthRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users,email'],
             'age' => ['required', 'integer', 'min:0'],
             'password' => ['required', 'string', 'min:6'],
-            'party_affiliation' => ['nullable', 'in:Ouwet,Aoun,Dashnak,Kataeb,Hezbollah,Haraket Amal,Marada Movement,Progressive Socialist Party'],
+            'sex' => [ 'required', 'in:m, f'],
+            'party_affiliation' => ['required', 'in:none,ouwet,aoun,dashnak,kataeb,hezbollah,haraket amal,marada movement,progressive socialist party'],
         ];
     }
 }
