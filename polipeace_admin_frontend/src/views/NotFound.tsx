@@ -1,9 +1,8 @@
-import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
     <div>
-      <Sidebar />
       <div className="" style={{
         position:'absolute',
         left:'50%',
@@ -11,13 +10,15 @@ export default function NotFound() {
         transform:'translate(-50%,-50%)',
         textAlign:'center',
         color:'#642C4B',
-        marginLeft:'80px'
       }}>
         <h1 className="display-3 fw-normal">404 - Not Found </h1>
         <p>
           The page you are looking for is not a valid one. 
           <br/>
-          Please check for a valid one
+          Please check for a valid one.
+          <Link to="/dashboard">
+            Go back
+          </Link>
         </p>
       </div>
     </div>

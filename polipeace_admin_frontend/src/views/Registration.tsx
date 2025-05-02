@@ -75,7 +75,7 @@ export default function Registration() {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={registerUser}
               />
-              <p className='mt-2' style={{fontSize:'.8em'}}>
+              <p className='mt-3' style={{fontSize:'.8em'}}>
                 Already have an account? <Link to='/login'> <span style={{color:'black', textDecoration:'underline'}}>Login</span></Link>
               </p>
             </div>

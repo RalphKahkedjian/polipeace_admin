@@ -3,7 +3,6 @@ import axiosClient from "../axiosClient";
 import { Admin } from "../models/Admin";
 
 
-
 export default function Admins() {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -12,6 +11,7 @@ export default function Admins() {
     axiosClient.get('/Admin/Admins')
       .then(({ data }) => {
         setAdmins(data.admins);
+        console.log(data.admins)
       })
       .catch((err) => {
         console.error("Failed to fetch admins:", err);
@@ -23,7 +23,7 @@ export default function Admins() {
   }, []);
 
   const filteredAdmins = admins.filter((admin) => {
-    admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase())
+    return admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase())
   });
 
   return (
