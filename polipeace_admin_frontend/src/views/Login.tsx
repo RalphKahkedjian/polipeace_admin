@@ -11,7 +11,7 @@ import { useStateContext } from '../contexts/contextProvider';
 export default function Login() {
 
   const navigate = useNavigate()
-  const {setUser, setToken} = useStateContext()
+  const {setUser, setToken, setEmail, setAge, setID} = useStateContext()
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -34,6 +34,9 @@ export default function Login() {
       console.log(data.token)
       setUser(data.admin.username)
       setToken(data.token)
+      setEmail(data.admin.email)
+      setAge(data.admin.age)
+      setID(data.admin.id)
       navigate('/');
     })
     .catch(err=> {
@@ -58,8 +61,8 @@ export default function Login() {
                 width={170}
                 height={45}
                 text='Login'
-                color={isHovered ? '#642C4B' : '#F3ECEF'}
-                backgroundColor={isHovered ? 'white' : '#642C4B'}
+                color={isHovered ? '#4B1F3E' : '#F3ECEF'}
+                backgroundColor={isHovered ? 'white' : '#4B1F3E'}
                 borderRadius='8px'
                 border='2px solid #642C4B'
                 paddingTop={6.5}
@@ -77,7 +80,7 @@ export default function Login() {
           position: 'absolute',
           bottom: '0px',
           fontSize: '.8em',
-          color: '#642C4B'
+          color: '#4B1F3E'
         }}>
           <p>&copy; Ralph Kahkedjian 2025</p>
         </div>

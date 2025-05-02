@@ -7,8 +7,7 @@ export default function Profile() {
   const [profilePic, setProfilePic] = useState("/Images/profile.jpg");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Implement email , id, name, age from ContextProvider file
-  //const {user} = useStateContext()
+  const {user, email, age, id} = useStateContext()
 
   const handleProfileClick = () => {
     if (fileInputRef.current) {
@@ -45,23 +44,23 @@ export default function Profile() {
       <div className="profile-info">
         <div className="form-row">
           <label>ID</label>
-          <input type="text" value="ID123456" disabled />
+          <input type="text" value={id} disabled />
         </div>
 
         <div className="form-row two-columns">
           <div>
             <label>Email</label>
-            <input type="email" value="john@example.com" disabled />
+            <input type="email" value={email} disabled />
           </div>
           <div>
             <label>Name</label>
-            <input type="text" value="John Doe" disabled />
+            <input type="text" value={user} disabled />
           </div>
         </div>
 
         <div className="form-row">
           <label>Age</label>
-          <input type="number" value="25" disabled />
+          <input type="number" value={age} disabled />
         </div>
 
         <button className="delete-btn mt-2" style={{ backgroundColor: '#642C4B', width: '180px' }}>

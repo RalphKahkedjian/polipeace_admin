@@ -44,7 +44,7 @@
 
 .auth-form h1 {
   font-size: 3em;
-  color: #642C4B;
+  color: #4B1F3E;
 }
 
 .auth-input-field {
@@ -74,7 +74,7 @@
   width: auto;
   padding: 25px;
   height: 55px;
-  background-color: #642C4B;
+  background-color: #4B1F3E;
   text-align: center;
   border-radius: 10px;
   color: white;
@@ -105,7 +105,7 @@
 .button-outlet {
   width: 215px;
   height: 55px;
-  background-color: #642C4B;
+  background-color: #4B1F3E;
   text-align: start;
   border-radius: 10px;
   color: white;

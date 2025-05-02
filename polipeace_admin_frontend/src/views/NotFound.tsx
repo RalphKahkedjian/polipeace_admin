@@ -16,7 +16,7 @@ export default function NotFound() {
           The page you are looking for is not a valid one. 
           <br/>
           Please check for a valid one.
-          <Link to="/dashboard">
+          <Link to="/">
             Go back
           </Link>
         </p>

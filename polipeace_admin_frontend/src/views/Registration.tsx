@@ -11,7 +11,7 @@ import { useStateContext } from '../contexts/contextProvider';
 export default function Registration() {
 
   const navigate = useNavigate()
-  const {setUser,setToken} = useStateContext()
+  const {setUser,setToken, setEmail, setAge, setID} = useStateContext()
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -36,9 +36,13 @@ export default function Registration() {
       console.log(data.admin.username)
       console.log(data.admin.email)
       console.log(data.admin.age)
+      console.log(data.admin.id)
       console.log(data.token)
       
       setUser(data.admin.username)
+      setEmail(data.admin.email)
+      setAge(data.admin.age)
+      setID(data.admin.id)
       setToken(data.token)
       navigate('/')
     })
@@ -66,8 +70,8 @@ export default function Registration() {
                 width={170}
                 height={45}
                 text='Register'
-                color={isHovered ? '#642C4B' : '#F3ECEF'}
-                backgroundColor={isHovered ? 'white' : '#642C4B'}
+                color={isHovered ? '#4B1F3E' : '#F3ECEF'}
+                backgroundColor={isHovered ? 'white' : '#4B1F3E'}
                 borderRadius='8px'
                 border='2px solid #642C4B'
                 paddingTop={6.5}
@@ -85,7 +89,7 @@ export default function Registration() {
           position: 'absolute',
           bottom: '0px',
           fontSize: '.8em',
-          color: '#642C4B'
+          color: '#4B1F3E'
         }}>
           <p>&copy; Ralph Kahkedjian 2025</p>
         </div>

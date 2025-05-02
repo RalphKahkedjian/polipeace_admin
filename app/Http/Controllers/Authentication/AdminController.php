@@ -51,6 +51,7 @@ class AdminController extends Controller
                 "status" => true,
                 "message" => "Welcome back $admin->username",
                 "admin" => [
+                    "id" => $admin->id,
                     "username" => $admin->username,
                     "email" => $admin->email,
                     "age" => $admin->age

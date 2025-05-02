@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: 'Montserrat';
+}
+
+.card-container {
+  text-align: start;
+  justify-content: center;
+  width: 270px;
+  height: 150px;
+  background-color: #F2F2F2;
+  color: #4B1F3E;
+  border-radius: 8px;
+  box-shadow: 5px 5px 6px #4B1F3E;
+}

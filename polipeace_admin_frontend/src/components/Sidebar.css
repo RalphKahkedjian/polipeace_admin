@@ -10,7 +10,7 @@
   top: 0;
   width: 250px;
   height: 100vh;
-  background-color: #642C4B;
+  background-color: #4B1F3E;
   color: #F3ECEF;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
 }
 
 .sidebar-links a {
-  color: #F3ECEF;
+  color: #F2F2F2;
   text-decoration: none;
   padding: 10px 20px;
   display: inline-block;
