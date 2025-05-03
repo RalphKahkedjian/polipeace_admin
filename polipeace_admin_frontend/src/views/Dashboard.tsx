@@ -1,37 +1,54 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import axiosClient from "../axiosClient";
+import { Link } from "react-router-dom";
+
 
 export default function Dashboard() {
 
   const [userCount, setUserCount] = useState(0)
+  const [adminCount, setAdminCount] = useState(0)
+  
 
-  useEffect(()=> {
-    axiosClient.get('/User/Users')
+  const getTypeCount = (
+    type: string,
+    setCount: React.Dispatch<React.SetStateAction<number>>
+  ) => {
+    axiosClient.get(`/${type}/${type}s`)
       .then(({ data }) => {
-        setUserCount(data.users.length);
+        const key = type.toLowerCase() + "s";
+        if (data[key]) {
+          setCount(data[key].length);
+        }
       })
       .catch((err) => {
-        console.error("Failed to fetch users:", err);
+        console.log(`Failed to fetch ${type}s: `, err);
       });
-  },[])
+  };
+  
+
+  useEffect(() => {
+    getTypeCount("Admin", setAdminCount);
+    getTypeCount("User", setUserCount);
+  }, []);
+  
 
   return (
     <div>
-      <div className="d-flex mt-5 pt-3" style={{gap:'30px'}}>
-      <Card
-      title="Total Users"
-      description={userCount}
-      />
-      <Card
-      title="Upcoming Events"
-      description={3}
-      />
-      <Card
-      title="Active Users"
-      description={13}
-      />
-      
+      <div className="d-block mt-5">
+        <div className="d-flex pt-4" style={{gap:'20px'}}>  
+          <Card
+          title="Total Users"
+          description={userCount}
+          redirection={<Link to='/users'><span style={{textDecoration:'underline black', color:'#4B1F3E', fontWeight:'350'}}>➥ Add / Remove Users</span></Link>}
+          />
+          <Card
+          title="Total Admins"
+          description={adminCount}
+          redirection={<Link to='/admins'><span style={{textDecoration:'underline black', color:'#4B1F3E', fontWeight:'350'}}>➥ Add / Remove Admins</span></Link>}
+          />
+        </div>
+        
       </div>
     </div>
   )
