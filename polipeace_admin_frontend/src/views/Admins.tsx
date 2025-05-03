@@ -71,6 +71,38 @@ export default function Admins() {
           )}
         </tbody>
       </table>
+      <div style={{
+        position:'fixed',
+        bottom:'20px',
+        display:'flex',
+        gap:'10px'
+      }}>
+        <button style={{
+          width:'130px',
+          height:'45px',
+          backgroundColor:'#4B1F3E',
+          color:'white',
+          borderRadius:'6px',
+          boxShadow:'5px 6px 7px #4B1F3E',
+          border:'.5px solid white'
+        }}
+        >
+          Add Admin
+        </button>
+        <button style={{
+          width:'130px',
+          height:'45px',
+          backgroundColor:'#4B1F3E',
+          color:'white',
+          borderRadius:'6px',
+          boxShadow:'5px 6px 7px #4B1F3E',
+          border:'.5px solid white'
+        }}
+        >
+          Delete Admin
+        </button>
+      </div>
+
     </div>
   );
 }

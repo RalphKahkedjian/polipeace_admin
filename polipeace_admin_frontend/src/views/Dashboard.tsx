@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import axiosClient from "../axiosClient";
 import { Link } from "react-router-dom";
+import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Graph";
 
 
 export default function Dashboard() {
@@ -47,8 +48,20 @@ export default function Dashboard() {
           description={adminCount}
           redirection={<Link to='/admins'><span style={{textDecoration:'underline black', color:'#4B1F3E', fontWeight:'350'}}>➥ Add / Remove Admins</span></Link>}
           />
+          <Card
+          title="Post Announcement"
+          description={0}
+          redirection={<Link to='/announcements'><span style={{textDecoration:'underline black', color:'#4B1F3E', fontWeight:'350'}}>➥ Add / Remove Announcements</span></Link>}
+          />
         </div>
-        
+          <div className="w-75 h-75" style={{
+            marginTop:'50px'
+          }}>
+            <h3 className="mb-3">
+              Party Distributions
+            </h3>
+            <Party_Affiliation_Graph />
+          </div>
       </div>
     </div>
   )

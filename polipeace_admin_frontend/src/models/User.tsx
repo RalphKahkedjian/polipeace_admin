@@ -13,6 +13,6 @@ enum PartyAffiliation {
   'kataeb', 
   'hezbollah', 
   'haraket amal', 
-  'marada aovement', 
+  'marada movement', 
   'progressive socialist party'
 }
