@@ -7,12 +7,14 @@ export interface User {
 }
 
 enum PartyAffiliation {
-  'ouwet', 
-  'aoun', 
-  'dashnak', 
+  'none',
+  'lebanese forces', 
+  'free patriotic movement', 
+  'tashnag', 
   'kataeb', 
   'hezbollah', 
-  'haraket amal', 
+  'amal movement', 
   'marada movement', 
+  'future movement',
   'progressive socialist party'
 }

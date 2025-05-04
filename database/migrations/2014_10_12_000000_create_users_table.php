@@ -23,13 +23,14 @@ return new class extends Migration
             ]);
             $table->enum('party_affiliation', [
                 'none',
-                'ouwet', 
-                'aoun', 
-                'dashnak', 
+                'lebanese forces', 
+                'free patriotic movement', 
+                'tashnag', 
                 'kataeb', 
                 'hezbollah', 
-                'haraket amal', 
+                'amal movement', 
                 'marada movement', 
+                'future movement',
                 'progressive socialist party'
             ]);
             $table->rememberToken();

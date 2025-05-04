@@ -6,14 +6,15 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 export default function Party_Affiliation_Graph() {
   const [partyCounts, setPartyCounts] = useState({
-    Ouwet: 0,
-    Aoun: 0,
-    Dashnak: 0,
+    LebaneseForces: 0,
+    FreePatrioticMovement: 0,
+    Tashnag: 0,
     Kataeb: 0,
     Hezbollah: 0,
-    HaraketAmal: 0,
+    AmalMovement: 0,
     MaradaMovement: 0,
-    ProgressiveSocialistParty: 0
+    ProgressiveSocialistParty: 0,
+    FutureMovement: 0
   });
   useEffect(() => {
     axiosClient.get('/User/Users')
@@ -24,14 +25,14 @@ export default function Party_Affiliation_Graph() {
           const party = user.party_affiliation?.toLowerCase();
   
           switch (party) {
-            case 'ouwet':
-              newPartyCounts.Ouwet++;
+            case 'lebanese forces':
+              newPartyCounts.LebaneseForces++;
               break;
-            case 'aoun':
-              newPartyCounts.Aoun++;
+            case 'free patriotic movement':
+              newPartyCounts.FreePatrioticMovement++;
               break;
-            case 'dashnak':
-              newPartyCounts.Dashnak++;
+            case 'tashnag':
+              newPartyCounts.Tashnag++;
               break;
             case 'kataeb':
               newPartyCounts.Kataeb++;
@@ -39,14 +40,17 @@ export default function Party_Affiliation_Graph() {
             case 'hezbollah':
               newPartyCounts.Hezbollah++;
               break;
-            case 'haraketamal':
-              newPartyCounts.HaraketAmal++;
+            case 'amal movement':
+              newPartyCounts.AmalMovement++;
               break;
-            case 'maradamovement':
+            case 'marada movement':
               newPartyCounts.MaradaMovement++;
               break;
-            case 'progressivesocialistparty':
+            case 'progressive socialist party':
               newPartyCounts.ProgressiveSocialistParty++;
+              break;
+            case 'future movement':
+              newPartyCounts.FutureMovement++;
               break;
             default:
               break;
