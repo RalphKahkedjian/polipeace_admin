@@ -1,5 +1,4 @@
 import './Profile.css';
-import CoverImage from '../assets/images/ProfileCover.png';
 import { useState, useRef } from 'react';
 import { useStateContext } from '../contexts/contextProvider';
 
@@ -27,21 +26,17 @@ export default function Profile() {
   
   return (
     <div className="profile-container">
-      <div className="cover-photo">
-        <img src={CoverImage} alt="Cover" className="cover-img" />
-        <div className="profile-pic-wrapper" onClick={handleProfileClick}>
-          <img src={profilePic} alt="Profile" className="profile-pic" />
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleImageChange}
-            style={{ display: 'none' }}
-          />
-        </div>
-      </div>
-
       <div className="profile-info">
+        <div className='d-flex' style={{
+          gap:'30px'
+        }}>
+        <div className='profile-picture'>
+          hi
+        </div>
+        <div className='mt-5' style={{fontStyle:'italic'}}>
+          A description of who is the admin
+        </div>
+        </div>
         <div className="form-row">
           <label>ID</label>
           <input type="text" value={id} disabled />
@@ -63,9 +58,14 @@ export default function Profile() {
           <input type="number" value={age} disabled />
         </div>
 
+        <div className='d-flex' style={{gap:'20px'}}>
         <button className="delete-btn mt-2" style={{ backgroundColor: '#642C4B', width: '180px' }}>
           Delete Profile
         </button>
+        <button className="delete-btn mt-2" style={{ backgroundColor: '#642C4B', width: '180px' }}>
+          Edit Profile
+        </button>
+        </div>
       </div>
     </div>
   );

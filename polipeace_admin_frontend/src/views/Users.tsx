@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../axiosClient";
 import { User } from "../models/User";
-import UserPopup from "../components/Popup/UserPopup";
 
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [isPopup, setIsPopup] = useState(false)
-
-  const openPopup = ()=> {
-    setIsPopup(true)
-  }
 
   const getUsers = () => {
     axiosClient.get('/User/Users')
@@ -96,7 +90,6 @@ export default function Users() {
           boxShadow:'5px 6px 7px #4B1F3E',
           border:'.5px solid white'
         }}
-        onClick={openPopup}
         >
           Add User
         </button>
@@ -113,19 +106,6 @@ export default function Users() {
           Delete User
         </button>
       </div>
-
-      {isPopup && 
-      <div style={{
-        position:'absolute',
-        left:'50%',
-        top:'50%',
-        transform:'translate(-50%,-50%)',
-        marginLeft:'40px'
-      }}
-      >
-        <UserPopup />
-      </div>
-      }
     </div>
   );
 }

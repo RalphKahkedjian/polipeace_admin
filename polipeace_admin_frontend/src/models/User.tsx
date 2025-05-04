@@ -1,5 +1,6 @@
 export interface User {
-  id: number;
+  [x: string]: string | number | readonly string[] | undefined;
+  id?: number;
   name: string;
   email: string;
   age: number;
