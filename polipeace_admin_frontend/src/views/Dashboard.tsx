@@ -3,13 +3,16 @@ import Card from "../components/Card";
 import axiosClient from "../axiosClient";
 import { Link } from "react-router-dom";
 import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Graph";
+import UserContenders from "../components/Contenders/UserContenders";
 
 
 export default function Dashboard() {
 
   const [userCount, setUserCount] = useState(0)
   const [adminCount, setAdminCount] = useState(0)
-  
+
+  const date = new Date()
+  const dateTime = date.toLocaleDateString()
 
   const getTypeCount = (
     type: string,
@@ -55,12 +58,27 @@ export default function Dashboard() {
           />
         </div>
           <div className="w-75 h-75" style={{
-            marginTop:'50px'
+            marginTop:'70px'
           }}>
             <h3 className="mb-3">
               Party Distributions
             </h3>
             <Party_Affiliation_Graph />
+          </div>
+          <div className="w-100" style={{
+            marginTop:'70px'
+          }}>
+            <h3>
+             Contenders of the Week
+            </h3>
+            <UserContenders user1="Ralph Kahkedjian" user2="Sarah Djebali" date={dateTime} />
+          </div>
+          <div style={{
+            marginTop:'70px'
+          }}>
+            <h3>
+              Polipeace Chatbot
+            </h3>
           </div>
       </div>
     </div>

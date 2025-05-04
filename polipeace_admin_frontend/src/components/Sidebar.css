@@ -62,7 +62,7 @@
   position: absolute;
   width: 250px;
   height: 100%;
-  background-color: #F3ECEF;
+  background-color: #F2F2F2;
   color: #642C4B;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -88,7 +88,7 @@
   font-weight: 600;
   background-color: transparent;
   padding-left: 40px;
-  position: relative; /* Needed for ::after */
+  position: relative;
   z-index: 1;
 }
 
@@ -97,7 +97,7 @@
   position: absolute;
   width: 250px;
   height: 100%;
-  background-color: #F3ECEF;
+  background-color: #F2F2F2;
   color: #642C4B;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
