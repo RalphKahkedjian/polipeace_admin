@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axiosClient from "../axiosClient";
+import axiosClient from "../Services/axiosClient";
 import { Admin } from "../models/Admin";
 
 

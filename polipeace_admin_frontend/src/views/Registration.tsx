@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import AuthBackgroundImage from '../assets/images/Login.png';
 import Button from '../components/Button';
 import '../views/AuthForm.css';
-import axiosClient from '../axiosClient';
+import axiosClient from '../Services/axiosClient';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/contextProvider';

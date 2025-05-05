@@ -1,4 +1,4 @@
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../components/Sidebar.css';
 
 export default function Sidebar() {
