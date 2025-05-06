@@ -8,7 +8,7 @@ import Dashboard from "./views/Dashboard";
 import Admins from "./views/Admins";
 import Users from "./views/Users";
 import Profile from "./views/Profile";
-import UserForm from "./components/Forms/userForm";
+import UserForm from "./views/userForm";
 const router = createBrowserRouter([
   {
     path: '/',

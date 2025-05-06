@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../Services/axiosClient";
 import { User } from "../models/User";
-import UserForm from "../components/Forms/userForm";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [showForm, setShowForm] = useState(false)
-
-  const handleClick = ()=> {
-    setShowForm(true)
-  }
-
+  const navigate = useNavigate()
 
   const getUsers = () => {
     axiosClient.get('/User/Users')
@@ -59,9 +54,9 @@ export default function Users() {
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>ID</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Party Affiliation</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Age</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Sex</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Party Affiliation</th>
           </tr>
         </thead>
         <tbody>
@@ -71,9 +66,9 @@ export default function Users() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.id}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.name}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.email}</td>
+                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.party_affiliation}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.age}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.sex}</td>
-                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.party_affiliation}</td>
               </tr>
             ))
           ) : (
@@ -98,9 +93,9 @@ export default function Users() {
           color:'white',
           borderRadius:'6px',
           boxShadow:'5px 6px 7px #4B1F3E',
-          border:'.5px solid white'
+          paddingTop:'8px'
         }}
-        onClick={handleClick}
+        onClick={()=> navigate('/users/new')}
         >
           Add User
         </button>
@@ -111,18 +106,12 @@ export default function Users() {
           color:'white',
           borderRadius:'6px',
           boxShadow:'5px 6px 7px #4B1F3E',
-          border:'.5px solid white'
+          paddingTop:'8px'
         }}
         >
           Delete User
         </button>
       </div>
-      
-      {showForm &&  (
-        <div style={{position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
-          <UserForm />
-        </div>
-      )}
     </div>
   );
 }

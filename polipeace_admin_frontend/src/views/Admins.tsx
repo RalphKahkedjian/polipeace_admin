@@ -84,7 +84,7 @@ export default function Admins() {
           color:'white',
           borderRadius:'6px',
           boxShadow:'5px 6px 7px #4B1F3E',
-          border:'.5px solid white'
+          paddingTop:'8px'
         }}
         >
           Add Admin
@@ -96,7 +96,7 @@ export default function Admins() {
           color:'white',
           borderRadius:'6px',
           boxShadow:'5px 6px 7px #4B1F3E',
-          border:'.5px solid white'
+          paddingTop:'8px'
         }}
         >
           Delete Admin

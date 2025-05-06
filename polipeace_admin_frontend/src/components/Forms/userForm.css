@@ -1,0 +1,49 @@
+.user-form-design {
+  width: 100%;
+  height: 40em;
+  height: auto;
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.user-form-design input, label, button {
+  display: flex;
+  width: 99%;
+  flex-direction: column;
+  margin-top: 30px;
+  transition: .4s ease-in;
+}
+
+.user-form-design button {
+  width: 98%;
+  text-align: center;
+  padding-top: 10px;
+  height: 3em;
+  border-radius: 8px;
+  background-color: #F2F2F2;
+  color: #642C4B;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: none;
+  letter-spacing: .8px;
+  box-shadow: 3px 3px 3px 3px #642C4B;
+}
+
+.user-form-design button:hover, label:hover, select:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.user-form-design select {
+  background-color: #642C4B;
+  color: #F2F2F2;
+  height: 2.3em;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.go-back-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

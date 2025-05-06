@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import '../components/Forms/userForm.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserForm() {
   const [form, setForm] = useState({
@@ -12,6 +14,7 @@ export default function UserForm() {
   });
 
   const [message, setMessage] = useState('');
+  const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,26 +24,36 @@ export default function UserForm() {
     e.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/User/Register', form);
-      setMessage(response.data.message);
+      setMessage(`User ( ${response.data.user.name} ) was successfully added !`);
     } catch (error: any) {
       setMessage(error.response?.data?.message || 'Registration failed');
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+    <div className='User-form-container'>
+      <h2>Users <span style={{fontStyle:'italic', fontSize:'.8em'}}>/ Add User</span></h2>
+      <p className='mt-3 go-back-link' onClick={()=> navigate('/users')}>➥ Go back</p>
+      <ul style={{
+        height:'.05em',
+        width:'99%',
+        backgroundColor:'#642C4B'
+      }} />
+      <form onSubmit={handleSubmit} className='user-form-design'>
+        <label>Enter user's name</label>
         <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <label>Enter user's email</label>
         <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+        <label>Enter user's age</label>
         <input type="number" name="age" placeholder="Age" value={form.age} onChange={handleChange} required />
+        <label>Enter user's password</label>
         <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-
+        <label>Enter user's sex</label>
         <select name="sex" value={form.sex} onChange={handleChange}>
           <option value="m">Male</option>
           <option value="f">Female</option>
         </select>
-
+        <label>Enter user's Party Affiliation</label>
         <select name="party_affiliation" value={form.party_affiliation} onChange={handleChange}>
           <option value="none">None</option>
           <option value="lebanese forces">Lebanese Forces</option>
@@ -54,9 +67,11 @@ export default function UserForm() {
           <option value="progressive socialist party">Progressive Socialist Party</option>
         </select>
 
-        <button type="submit">Register</button>
+        <button type="submit">Register User</button>
       </form>
-      {message && <p>{message}</p>}
+      <div className='alert alert-success'>
+        {message && <p><span className='fw-bold'>Success:</span> {message}</p>}
+      </div>
     </div>
   );
 }
