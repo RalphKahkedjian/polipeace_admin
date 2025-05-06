@@ -1,28 +1,9 @@
 import './Profile.css';
-import { useState, useRef } from 'react';
 import { useStateContext } from '../contexts/contextProvider';
 
 export default function Profile() {
-  const [profilePic, setProfilePic] = useState("/Images/profile.jpg");
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const {user, email, age, id} = useStateContext()
-
-  const handleProfileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
   
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfilePic(imageUrl);
-    }
-  };
-
+  const {user, email, age, id} = useStateContext()
   
   return (
     <div className="profile-container">
