@@ -115,3 +115,30 @@
   text-align: center;
   font-size: .95em;
 }
+
+.all-content {
+  margin-left: 270px;
+  margin-top: 10px;
+}
+
+.logout-button {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .sidebar-container {
+    display: none;
+  }
+
+  .all-content {
+    margin-left: 0px;
+    padding: 20px;
+  }
+
+  .logout-button {
+    display: none;
+  }
+}

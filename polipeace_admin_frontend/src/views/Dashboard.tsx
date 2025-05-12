@@ -4,7 +4,6 @@ import axiosClient from "../Services/axiosClient";
 import { Link } from "react-router-dom";
 import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Graph";
 import UserContenders from "../components/Contenders/UserContenders";
-import Chatbot from "../components/PolipeaceChatbot/Chatbot";
 
 
 export default function Dashboard() {
@@ -81,7 +80,6 @@ export default function Dashboard() {
             <h3>
               Polipeace Chatbot
             </h3>
-            <Chatbot />
           </div>
       </div>
     </div>

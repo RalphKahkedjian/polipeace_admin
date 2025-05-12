@@ -15,7 +15,7 @@ export default function NotFound() {
         <p>
           The page you are looking for is not a valid one. 
           <br/>
-          Please check for a valid one. 
+          Please check for a valid one.<br/>
           <Link to="/">
             Go back
           </Link>

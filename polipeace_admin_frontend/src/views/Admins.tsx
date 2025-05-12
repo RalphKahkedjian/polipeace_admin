@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../Services/axiosClient";
 import { Admin } from "../models/Admin";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Admins() {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const getAdmins = () => {
     axiosClient.get('/Admin/Admins')
@@ -22,7 +25,7 @@ export default function Admins() {
     getAdmins();
   }, []);
 
-  const filteredAdmins = admins.filter((admin) => {
+  const filteredAdmins = (admins?? []).filter((admin) => {
     return admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase())
   });
 
@@ -75,21 +78,25 @@ export default function Admins() {
         position:'fixed',
         bottom:'20px',
         display:'flex',
-        gap:'10px'
+        gap:'10px',
+        right:'20px'
       }}>
         <button style={{
-          width:'130px',
-          height:'45px',
+          width:'55px',
+          height:'55px',
           backgroundColor:'#4B1F3E',
           color:'white',
-          borderRadius:'6px',
+          borderRadius:'50%',
           boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'8px'
+          paddingTop:'7px',
+          fontSize:'1.7em',
+          textAlign:'center'
         }}
+        onClick={()=> navigate('/admins/new')}
         >
-          Add Admin
+          +
         </button>
-        <button style={{
+        {/* <button style={{
           width:'130px',
           height:'45px',
           backgroundColor:'#4B1F3E',
@@ -100,7 +107,7 @@ export default function Admins() {
         }}
         >
           Delete Admin
-        </button>
+        </button> */}
       </div>
 
     </div>

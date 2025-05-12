@@ -25,6 +25,9 @@ export default function UserForm() {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/User/Register', form);
       setMessage(`User ( ${response.data.user.name} ) was successfully added !`);
+      setTimeout(() => {
+        navigate('/users');
+      }, 1000);
     } catch (error: any) {
       setMessage(error.response?.data?.message || 'Registration failed');
     }

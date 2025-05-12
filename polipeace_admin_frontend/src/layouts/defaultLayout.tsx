@@ -42,9 +42,9 @@ export default function DefaultLayout() {
   return (
     <div>
       <Sidebar />
-      <div style={{ marginLeft: '270px', marginTop: '10px' }}>
+      <div className='all-content'>
         <h3 className="pt-2" style={{color:'#1A1A1A', fontSize:'2.1em'}}>{titlePage}</h3>
-        <div style={{ position: 'absolute', right: '10px', top: '15px' }}>
+        <div className='logout-button'>
           <div className="button-outlet" onClick={handleLogout}>
             <p className="pt-3" style={{ letterSpacing: '1px', fontWeight: '500', marginRight: '30px' }}>
               {user}

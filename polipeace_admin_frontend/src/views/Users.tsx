@@ -14,7 +14,6 @@ export default function Users() {
     axiosClient.get('/User/Users')
       .then(({ data }) => {
         setUsers(data.users);
-        console.log(data.users.party_affiliation)
       })
       .catch((err) => {
         console.error("Failed to fetch users:", err);
@@ -25,7 +24,7 @@ export default function Users() {
     getUsers();
   }, []);
 
-  const filteredUsers = users.filter((user) => 
+  const filteredUsers = (users?? []).filter((user) => 
     user.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
   );
   
@@ -83,23 +82,25 @@ export default function Users() {
       <div style={{
         position:'fixed',
         bottom:'20px',
+        right:'20px',
         display:'flex',
         gap:'10px'
       }}>
         <button style={{
-          width:'130px',
-          height:'45px',
+          width:'55px',
+          height:'55px',
           backgroundColor:'#4B1F3E',
           color:'white',
-          borderRadius:'6px',
+          borderRadius:'50%',
           boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'8px'
+          paddingTop:'7px',
+          fontSize:'1.7em'
         }}
         onClick={()=> navigate('/users/new')}
         >
-          Add User
+          +
         </button>
-        <button style={{
+        {/* <button style={{
           width:'130px',
           height:'45px',
           backgroundColor:'#4B1F3E',
@@ -110,7 +111,7 @@ export default function Users() {
         }}
         >
           Delete User
-        </button>
+        </button> */}
       </div>
     </div>
   );

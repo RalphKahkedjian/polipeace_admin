@@ -1,11 +1,12 @@
 .user-contender-container {
   width: 99%;
   margin-right: 20px;
-  background-color: #F2F2F2;
-  border-radius: 7px;
+  background-color: #4B1F3E;
+  border-radius: 15px;
   height: 17em;
   margin-top: 30px;
-  box-shadow: -2px -2px 8px #4B1F3E;
+  box-shadow: -5px -2px 8px #4B1F3E;
+  color: #F2F2F2;
 }
 
 .user-contenders-profile {
@@ -14,5 +15,5 @@
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  border: 1px solid #4B1F3E;
+  border: 1px solid #F2F2F2;
 }

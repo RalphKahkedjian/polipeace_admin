@@ -9,6 +9,7 @@ import Admins from "./views/Admins";
 import Users from "./views/Users";
 import Profile from "./views/Profile";
 import UserForm from "./views/userForm";
+import AdminForm from "./views/adminForm";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Dashboard /> },
       { path: 'admins', element: <Admins /> },
+      { path: 'admins/new', element: <AdminForm /> },
       { path: 'users', element: <Users /> },
       { path: 'users/new', element: <UserForm />},
       { path: 'profile', element: <Profile />},
