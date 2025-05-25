@@ -6,35 +6,22 @@ interface UserContenderProps {
   date: any
 }
 
-
 export default function UserContenders({user1, user2, date}: UserContenderProps) {
   return (
     <div className="user-contender-container">
-      <div className='d-flex text-center align-items-center justify-content-between p-5' style={{
-        gap:'40px'
-      }}>
+      <div className='d-flex mt-3 justify-content-between mt-5 p-4'>
         <div className='d-block'>
-          <h2 className='fw-normal'>
-            {user1}
-          </h2>
-          <div className='user-contenders-profile'>
-            profile pic
-          </div>
+          <div className='user-contender-profile'></div>
+          <div className='m-2'>{user1}</div>
         </div>
         <div>
-          <span className='fw-bold' style={{
-            letterSpacing:'1px',
-          }}>
-            {date}
-          </span>
+          <strong className='m-5'>
+          {date}
+        </strong>
         </div>
         <div className='d-block'>
-          <h2 className='fw-normal'>
-            {user2}
-          </h2>
-          <div className='user-contenders-profile'>
-            profile pic
-          </div>
+          <div className='user-contender-profile'></div>
+          <div className='m-2'>{user2}</div>
         </div>
       </div>
     </div>

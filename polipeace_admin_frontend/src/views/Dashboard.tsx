@@ -72,7 +72,7 @@ export default function Dashboard() {
             <h3>
              Contenders of the Week
             </h3>
-            <UserContenders user1="Ralph Kahkedjian" user2="Sarah Djebali" date={dateTime} />
+            <UserContenders user1="Ralph Kahkedjian" user2="Fredy Kahkedjian" date={dateTime} />
           </div>
           <div style={{
             marginTop:'70px'

@@ -3,4 +3,5 @@ export interface Admin {
   username: string;
   email: string;
   age: number;
+  profilepic: string
 }

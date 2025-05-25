@@ -25,7 +25,8 @@ class AdminAuthRequest extends FormRequest
             "username" => "required|String|max:55",
             "email" => "required|email|unique:admins,email",
             "password" => "required|string|min:5",
-            "age" => "required|integer|min:18"
+            "age" => "required|integer|min:18",
+            "profile_pic" => "required|string|max:255",
         ];
     }
 }

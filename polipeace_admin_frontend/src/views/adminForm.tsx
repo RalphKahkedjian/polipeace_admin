@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AdminForm() {
   const [form, setForm] = useState({
-    name: '',
+    username: '',
     email: '',
     age: '',
     password: '',
@@ -24,7 +24,7 @@ export default function AdminForm() {
       const response = await axios.post('http://127.0.0.1:8000/api/Admin/Register', form);
       setMessage(`Admin ( ${response.data.admin.name} ) was successfully added !`);
       setTimeout(() => {
-        navigate('/users');
+        navigate('/admins');
       }, 1000);
     } catch (error: any) {
       setMessage(error.response?.data?.message || 'Registration failed');
@@ -42,7 +42,7 @@ export default function AdminForm() {
       }} />
       <form onSubmit={handleSubmit} className='user-form-design'>
         <label>Enter admin's name</label>
-        <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <input type="text" name="username" placeholder="Name" value={form.username} onChange={handleChange} required />
         <label>Enter admin's email</label>
         <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
         <label>Enter admin's age</label>

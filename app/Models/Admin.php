@@ -17,6 +17,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
-        'age'
+        'age',
+        'profile_pic'
     ];
 }

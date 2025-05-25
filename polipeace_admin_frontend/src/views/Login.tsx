@@ -11,7 +11,7 @@ import { useStateContext } from '../contexts/contextProvider';
 export default function Login() {
 
   const navigate = useNavigate()
-  const {setUser, setToken, setEmail, setAge, setID} = useStateContext()
+  const {setUser, setToken, setEmail, setAge, setID, setProfilePic} = useStateContext()
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -37,6 +37,7 @@ export default function Login() {
       setEmail(data.admin.email)
       setAge(data.admin.age)
       setID(data.admin.id)
+      setProfilePic(data.admin.profilePictureURL)
       navigate('/');
     })
     .catch(err=> {

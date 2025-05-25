@@ -22,6 +22,7 @@ class AdminController extends Controller
         $admin->id = $request->get('id');
         $admin->username = $request->get('username');
         $admin->email = $request->get('email');
+        $admin->profile_pic = $request->get('profile_pic');
         $admin->password = Hash::make($request->get('password'));
         $admin->age = $request->get('age');
         $admin->save();
@@ -35,6 +36,7 @@ class AdminController extends Controller
                 "username" => $admin->username,
                 "email" => $admin->email,
                 "age" => $admin->age,
+                "profilePictureURL" => $admin->profile_pic
             ],
             "token" => $accessToken,
         ]);
@@ -54,7 +56,8 @@ class AdminController extends Controller
                     "id" => $admin->id,
                     "username" => $admin->username,
                     "email" => $admin->email,
-                    "age" => $admin->age
+                    "age" => $admin->age,
+                    "profilePictureURL" => $admin->profile_pic
                 ],
                 "token" => $accessToken
             ]);

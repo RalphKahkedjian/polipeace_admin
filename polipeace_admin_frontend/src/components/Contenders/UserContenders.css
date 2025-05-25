@@ -1,19 +1,18 @@
 .user-contender-container {
   width: 99%;
   margin-right: 20px;
-  background-color: #4B1F3E;
+  background-color: #f2f2f2;
   border-radius: 15px;
   height: 17em;
   margin-top: 30px;
-  box-shadow: -5px -2px 8px #4B1F3E;
-  color: #F2F2F2;
+  box-shadow: -5px -5px 8px #4B1F3E;
+  padding: 20px;
+  color: #4B1F3E;
 }
 
-.user-contenders-profile {
-  margin: auto;
-  margin-top: 30px;
-  width: 130px;
-  height: 130px;
+.user-contender-profile {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #4B1F3E;
 }

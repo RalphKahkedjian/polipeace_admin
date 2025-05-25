@@ -3,7 +3,10 @@ import { useStateContext } from '../contexts/contextProvider';
 
 export default function Profile() {
   
-  const {user, email, age, id} = useStateContext()
+  const {user, email, age, id, profilePic} = useStateContext()
+  debugger
+  console.log("profilePic:", profilePic);
+
   
   return (
     <div className="profile-container">
@@ -12,7 +15,7 @@ export default function Profile() {
           gap:'30px'
         }}>
         <div className='profile-picture'>
-          hi
+          <img src={profilePic} alt="Profile"/>
         </div>
         <div className='mt-5' style={{fontStyle:'italic'}}>
           A description of who is the admin
