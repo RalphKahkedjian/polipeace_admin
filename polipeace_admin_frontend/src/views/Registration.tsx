@@ -11,7 +11,7 @@ import { useStateContext } from '../contexts/contextProvider';
 export default function Registration() {
 
   const navigate = useNavigate()
-  const {setUser,setToken, setEmail, setAge, setID, setProfilePic} = useStateContext()
+  const {setUser,setToken, setEmail, setAge, setID} = useStateContext()
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,7 +19,6 @@ export default function Registration() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
-  const profilePicRef = useRef<HTMLInputElement>(null);
 
   const registerUser = (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.preventDefault();
@@ -29,7 +28,6 @@ export default function Registration() {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       age: Number(ageRef.current?.value),
-      profilePicRef: profilePicRef.current?.value
     };
     console.log(payload);
 
@@ -39,7 +37,6 @@ export default function Registration() {
       console.log(data.admin.email)
       console.log(data.admin.age)
       console.log(data.admin.id)
-      console.log(data.admin.profilePictureURL)
       console.log(data.token)
       
       setUser(data.admin.username)
@@ -47,7 +44,6 @@ export default function Registration() {
       setAge(data.admin.age)
       setID(data.admin.id)
       setToken(data.token)
-      setProfilePic(data.admin.profilePictureURL)
       navigate('/')
     })
     .catch(err=> {
@@ -69,7 +65,6 @@ export default function Registration() {
             <input type='email' placeholder='Enter your email' ref={emailRef} />
             <input type='password' placeholder='Enter your password' ref={passwordRef} />
             <input type='number' placeholder='Enter your age' ref={ageRef} />
-            <input type="file" accept="image/*" ref={profilePicRef} />
             <div className='mt-5'>
               <Button
                 width={170}

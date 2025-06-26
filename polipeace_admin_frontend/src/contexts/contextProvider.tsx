@@ -6,14 +6,12 @@ interface StateContextType {
   email: any;
   id: any;
   age: any;
-  profilePic: string | any;
   token: string | null;
   setUser: (user: any) => void;
   setToken: (token: string | null) => void;
   setEmail: (email: any) => void;
   setID: (id: any) => void;
   setAge: (age:any) => void;
-  setProfilePic: (profile_pic: string | any) => void;
 }
 
 // 2. Create the context
@@ -23,13 +21,11 @@ const stateContext = createContext<StateContextType>({
   email: null,
   id: null,
   age: null,
-  profilePic: null,
   setUser: () => {},
   setToken: () => {},
   setEmail: () => {},
   setID: () => {},
-  setAge: ()=> {},
-  setProfilePic: ()=> {}
+  setAge: ()=> {}
 });
 
 // 3. Define props type
@@ -43,7 +39,6 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
   const [email, _setEmail] = useState<any>(localStorage.getItem('email'))
   const [id, _setID] = useState<any>(localStorage.getItem('id'))
   const [age, _setAge] = useState<any>(localStorage.getItem('age'))
-  const [profilePic, _setProfilePic] = useState<any>(localStorage.getItem('profile_pic'))
   const [token, _setToken] = useState<string | null>(localStorage.getItem('access_token'))
 
   debugger;
@@ -97,16 +92,6 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
     }
   }
 
-  const setProfilePic = (profilePic: string | any) => {
-    _setProfilePic(profilePic)
-    if(profilePic) {
-      localStorage.setItem('profile_pic', profilePic)
-    } else {
-      localStorage.removeItem('profile_pic')
-    }
-  }
-
-
   return (
     <stateContext.Provider
       value={{
@@ -115,13 +100,11 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
         email,
         id,
         age,
-        profilePic,
         setUser,
         setToken,
         setEmail,
         setAge,
-        setID,
-        setProfilePic
+        setID
       }}
     >
       {children}

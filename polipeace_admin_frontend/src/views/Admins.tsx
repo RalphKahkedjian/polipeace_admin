@@ -3,7 +3,6 @@ import axiosClient from "../Services/axiosClient";
 import { Admin } from "../models/Admin";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Admins() {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -14,7 +13,7 @@ export default function Admins() {
     axiosClient.get('/Admin/Admins')
       .then(({ data }) => {
         setAdmins(data.admins);
-        console.log(data.admins)
+        console.log(data.admins);
       })
       .catch((err) => {
         console.error("Failed to fetch admins:", err);
@@ -25,8 +24,21 @@ export default function Admins() {
     getAdmins();
   }, []);
 
-  const filteredAdmins = (admins?? []).filter((admin) => {
-    return admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase())
+  const handleDelete = (id: number) => {
+    if (window.confirm("Are you sure you want to delete this admin?")) {
+      axiosClient.delete(`/Admin/${id}`)
+        .then(() => {
+          setAdmins((prev) => prev.filter((admin) => admin.id !== id));
+        })
+        .catch((err) => {
+          console.error("Failed to delete admin:", err);
+          alert("Error deleting admin");
+        });
+    }
+  };
+
+  const filteredAdmins = (admins ?? []).filter((admin) => {
+    return admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase());
   });
 
   return (
@@ -53,6 +65,7 @@ export default function Admins() {
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Age</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -63,53 +76,56 @@ export default function Admins() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.username}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.email}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.age}</td>
+                <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
+                  <div
+                    onClick={() => handleDelete(admin.id)}
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontSize: '2',
+                      color: 'red',
+                    }}
+                    title="Delete Admin"
+                  >
+                    🗑️
+                  </div>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={4} style={{ padding: '15px', textAlign: 'center' }}>
+              <td colSpan={5} style={{ padding: '15px', textAlign: 'center' }}>
                 ❌ No admins found...
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
       <div style={{
-        position:'fixed',
-        bottom:'20px',
-        display:'flex',
-        gap:'10px',
-        right:'20px'
+        position: 'fixed',
+        bottom: '20px',
+        display: 'flex',
+        gap: '10px',
+        right: '20px'
       }}>
         <button style={{
-          width:'55px',
-          height:'55px',
-          backgroundColor:'#4B1F3E',
-          color:'white',
-          borderRadius:'50%',
-          boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'7px',
-          fontSize:'1.7em',
-          textAlign:'center'
+          width: '55px',
+          height: '55px',
+          backgroundColor: '#4B1F3E',
+          color: 'white',
+          borderRadius: '50%',
+          boxShadow: '5px 6px 7px #4B1F3E',
+          paddingTop: '7px',
+          fontSize: '1.7em',
+          textAlign: 'center'
         }}
-        onClick={()=> navigate('/admins/new')}
+          onClick={() => navigate('/admins/new')}
         >
           +
         </button>
-        {/* <button style={{
-          width:'130px',
-          height:'45px',
-          backgroundColor:'#4B1F3E',
-          color:'white',
-          borderRadius:'6px',
-          boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'8px'
-        }}
-        >
-          Delete Admin
-        </button> */}
       </div>
-
     </div>
   );
 }

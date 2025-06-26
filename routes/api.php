@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/Admin/Register', [AdminController::class, 'register']);
 Route::post('/Admin/Login', [AdminController::class, 'login']);
 Route::get('/Admin/Admins', [AdminController::class, 'getAdmins']);
+Route::delete('/Admin/{admin}', [AdminController::class, 'deleteAdmin']);
 
 //Users' Routes
 Route::post('/User/Register', [UserController::class, 'register']);
