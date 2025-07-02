@@ -72,9 +72,17 @@ export default function UserForm() {
 
         <button type="submit">Register User</button>
       </form>
-      <div className='alert alert-success'>
-        {message && <p><span className='fw-bold'>Success:</span> {message}</p>}
-      </div>
+<div
+  className="alert alert-dark"
+  style={{ backgroundColor: '#4B1F3E' }}
+>
+  {message && (
+    <p>
+      <span className="fw-bold">Success:</span> {message}
+    </p>
+  )}
+</div>
+
     </div>
   );
 }

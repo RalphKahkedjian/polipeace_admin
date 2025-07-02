@@ -1,29 +1,46 @@
-import '../Contenders/UserContenders.css'
+import CircularProgress from '../Charts/User_Contender_Circular_Graph';
+import '../Contenders/UserContenders.css';
+
+
 
 interface UserContenderProps {
-  user1: string,
-  user2: string,
-  date: any
+  user1: string;
+  emailUser1: string;
+  user2: string;
+  emailUser2: string;
 }
 
-export default function UserContenders({user1, user2, date}: UserContenderProps) {
+export default function UserContenders({
+  user1,
+  user2,
+  emailUser1,
+  emailUser2,
+}: UserContenderProps) {
   return (
-    <div className="user-contender-container">
-      <div className='d-flex mt-3 justify-content-between mt-5 p-4'>
-        <div className='d-block'>
-          <div className='user-contender-profile'></div>
-          <div className='m-2'>{user1}</div>
+    <div className="user-contender-container container mt-4">
+      <div className="row align-items-center">
+        {/* User Info */}
+        <div className="col-md-6">
+          <div className="mb-4">
+            <h5>{user1}</h5>
+            <p>
+              <span className="fw-semibold">Email:</span> {emailUser1}
+            </p>
+          </div>
+          <br />
+          <div className="mb-4">
+            <h5>{user2}</h5>
+            <p>
+              <span className="fw-semibold">Email:</span> {emailUser2}
+            </p>
+          </div>
         </div>
-        <div>
-          <strong className='m-5'>
-          {date}
-        </strong>
-        </div>
-        <div className='d-block'>
-          <div className='user-contender-profile'></div>
-          <div className='m-2'>{user2}</div>
+
+        {/* Circular Graph */}
+        <div className="col-md-6 text-center">
+          <CircularProgress percentage={75} secondaryPercentage={25} user1Name={user1} user2Name={user2} />
         </div>
       </div>
     </div>
-  )
+  );
 }

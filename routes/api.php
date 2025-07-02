@@ -27,29 +27,7 @@ Route::delete('/Admin/{admin}', [AdminController::class, 'deleteAdmin']);
 Route::post('/User/Register', [UserController::class, 'register']);
 Route::post('/User/Login', [UserController::class, 'login']);
 Route::get('/User/Users', [UserController::class, 'getUsers']);
-
-//Chatbot Routes
-
-Route::get('/chat', function () {
-    $response = Http::withToken(config('services.openai.secret'))->withHeaders([
-        'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
-        'Content-Type' => 'application/json',
-    ])->post('https://api.openai.com/v1/chat/completions', [
-        'model' => 'gpt-3.5-turbo',
-        'messages' => [
-            [
-                'role' => 'system',
-                'content' => 'You are the system',
-            ],
-            [
-                'role' => 'user',
-                'content' => 'You are the user',
-            ]
-        ]
-    ]);
-
-    return $response->json();
-});
+Route::delete('/User/{user}', [UserController::class, 'deleteUser']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -4,6 +4,8 @@ import axiosClient from "../Services/axiosClient";
 import { Link } from "react-router-dom";
 import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Graph";
 import UserContenders from "../components/Contenders/UserContenders";
+import CircularProgress from "../components/Charts/User_Contender_Circular_Graph";
+import ChatBox from "../components/PolipeaceChatbot/Chatbot";
 
 
 export default function Dashboard() {
@@ -72,7 +74,9 @@ export default function Dashboard() {
             <h3>
              Contenders of the Week
             </h3>
-            <UserContenders user1="Ralph Kahkedjian" user2="Fredy Kahkedjian" date={dateTime} />
+            <div className="d-flex">
+            <UserContenders user1="Ralph Kahkedjian" emailUser1="ralph.kjian@hotmail.com" user2="Fredy Kahkedjian" emailUser2="freddy.kjian@gmail.com"/>
+            </div>
           </div>
           <div style={{
             marginTop:'70px'
@@ -80,6 +84,9 @@ export default function Dashboard() {
             <h3>
               Polipeace Chatbot
             </h3>
+            <ChatBox />
+          </div>
+          <div>
           </div>
       </div>
     </div>

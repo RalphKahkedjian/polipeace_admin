@@ -77,5 +77,14 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function deleteUser(User $user) {
+        $user->delete();
+        $username = $user->name;
+        return response()->json([
+            "status" => true,
+            "message" => "${username} has been deleted successfully",
+        ], 200);
+    }
 }
  
