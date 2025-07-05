@@ -46,7 +46,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
         display: 'flex',
         flexDirection: 'column',
         height: '500px',
-        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+        boxShadow: '-2px -3px 8px 5px #4B1F3E',
+        marginBottom:'40px'
       }}
     >
       {/* Messages */}

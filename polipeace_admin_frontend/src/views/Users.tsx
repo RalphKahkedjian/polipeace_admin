@@ -3,12 +3,11 @@ import axiosClient from "../Services/axiosClient";
 import { User } from "../models/User";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getUsers = () => {
     axiosClient.get('/User/Users')
@@ -20,14 +19,26 @@ export default function Users() {
       });
   };
 
+  const handleDelete = (id: number) => {
+    if (window.confirm("Are you sure you want to delete User")) {
+      axiosClient.delete(`/User/${id}`)
+        .then(() => {
+          setUsers((prev) => prev.filter((user) => user.id !== id));
+        })
+        .catch((err) => {
+          console.error("Failed to delete user:", err);
+          alert("Error deleting user");
+        });
+    }
+  };
+
   useEffect(() => {
     getUsers();
   }, []);
 
-  const filteredUsers = (users?? []).filter((user) => 
+  const filteredUsers = (users ?? []).filter((user) =>
     user.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
   );
-  
 
   return (
     <div style={{ marginTop: '70px' }}>
@@ -46,7 +57,7 @@ export default function Users() {
           border: '1px solid #ccc'
         }}
       />
-      
+
       <table style={{ width: '98%', borderCollapse: 'collapse', marginTop: '15px' }}>
         <thead style={{ backgroundColor: '#642C4B', color: 'white' }}>
           <tr>
@@ -56,6 +67,7 @@ export default function Users() {
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Party Affiliation</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Age</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Sex</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -68,50 +80,54 @@ export default function Users() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.party_affiliation}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.age}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.sex}</td>
+                <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
+                  <div
+                    onClick={() => user.id !== undefined && handleDelete(user.id)}
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: 'red',
+                      fontSize: '1.2em'
+                    }}
+                    title="Delete User"
+                  >
+                    🗑️
+                  </div>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={4} style={{ padding: '15px', textAlign: 'center' }}>
+              <td colSpan={7} style={{ padding: '15px', textAlign: 'center' }}>
                 ❌ No users found...
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
       <div style={{
-        position:'fixed',
-        bottom:'20px',
-        right:'20px',
-        display:'flex',
-        gap:'10px'
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        display: 'flex',
+        gap: '10px'
       }}>
         <button style={{
-          width:'55px',
-          height:'55px',
-          backgroundColor:'#4B1F3E',
-          color:'white',
-          borderRadius:'50%',
-          boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'7px',
-          fontSize:'1.7em'
+          width: '55px',
+          height: '55px',
+          backgroundColor: '#4B1F3E',
+          color: 'white',
+          borderRadius: '50%',
+          boxShadow: '5px 6px 7px #4B1F3E',
+          paddingTop: '7px',
+          fontSize: '1.7em'
         }}
-        onClick={()=> navigate('/users/new')}
+          onClick={() => navigate('/users/new')}
         >
           +
         </button>
-        {/* <button style={{
-          width:'130px',
-          height:'45px',
-          backgroundColor:'#4B1F3E',
-          color:'white',
-          borderRadius:'6px',
-          boxShadow:'5px 6px 7px #4B1F3E',
-          paddingTop:'8px'
-        }}
-        >
-          Delete User
-        </button> */}
       </div>
     </div>
   );

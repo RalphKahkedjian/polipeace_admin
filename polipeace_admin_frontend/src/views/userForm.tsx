@@ -74,7 +74,7 @@ export default function UserForm() {
       </form>
 <div
   className="alert alert-dark"
-  style={{ backgroundColor: '#4B1F3E' }}
+  style={{ backgroundColor: '#4B1F3E', color:'white' }}
 >
   {message && (
     <p>

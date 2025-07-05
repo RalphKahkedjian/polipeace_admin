@@ -2,25 +2,17 @@ import './Profile.css';
 import { useStateContext } from '../contexts/contextProvider';
 
 export default function Profile() {
-  
-  const {user, email, age, id, profilePic} = useStateContext()
-  debugger
-  console.log("profilePic:", profilePic);
+  const { user, email, age, id } = useStateContext();
 
-  
   return (
     <div className="profile-container">
       <div className="profile-info">
-        <div className='d-flex' style={{
-          gap:'30px'
-        }}>
-        <div className='profile-picture'>
-          <img src={profilePic} alt="Profile"/>
+        <div className='d-flex' style={{ gap: '30px' }}>
+          <div className='mt-5 profile-description'>
+            Add a description of you by pressing the button below.
+          </div>
         </div>
-        <div className='mt-5' style={{fontStyle:'italic'}}>
-          A description of who is the admin
-        </div>
-        </div>
+
         <div className="form-row">
           <label>ID</label>
           <input type="text" value={id} disabled />
@@ -42,13 +34,9 @@ export default function Profile() {
           <input type="number" value={age} disabled />
         </div>
 
-        <div className='d-flex' style={{gap:'20px'}}>
-        <button className="delete-btn mt-2" style={{ backgroundColor: '#642C4B', width: '180px' }}>
-          Delete Profile
-        </button>
-        <button className="delete-btn mt-2" style={{ backgroundColor: '#642C4B', width: '180px' }}>
-          Edit Profile
-        </button>
+        <div className='d-flex button-group'>
+          <button className="profile-btn">Delete Profile</button>
+          <button className="profile-btn">Add Description</button>
         </div>
       </div>
     </div>

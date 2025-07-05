@@ -33,8 +33,8 @@ export default function AdminForm() {
 
   return (
     <div className='User-form-container'>
-      <h2>Users <span style={{fontStyle:'italic', fontSize:'.8em'}}>/ Add Admin</span></h2>
-      <p className='mt-3 go-back-link' onClick={()=> navigate('/users')}>➥ Go back</p>
+      <h2>Admins <span style={{fontStyle:'italic', fontSize:'.8em'}}>/ Add Admin</span></h2>
+      <p className='mt-3 go-back-link' onClick={()=> navigate('/admins')}>➥ Go back</p>
       <ul style={{
         height:'.05em',
         width:'99%',
@@ -51,7 +51,10 @@ export default function AdminForm() {
         <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
         <button type="submit">Register Admin</button>
       </form>
-      <div className='alert alert-success'>
+      <div
+        className="alert alert-dark"
+        style={{ backgroundColor: '#4B1F3E', color:'white' }}
+      >
         {message && <p><span className='fw-bold'>Success:</span> {message}</p>}
       </div>
     </div>
