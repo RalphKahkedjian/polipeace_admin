@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axiosClient from "../Services/axiosClient";
 import { User } from "../models/User";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
@@ -81,19 +83,16 @@ export default function Users() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.age}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.sex}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
-                  <div
-                    onClick={() => user.id !== undefined && handleDelete(user.id)}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      color: 'red',
-                      fontSize: '1.2em'
-                    }}
-                    title="Delete User"
-                  >
-                    🗑️
-                  </div>
+<i
+  className="bi bi-trash"
+  style={{
+    cursor: 'pointer',
+    color: '#482653',
+    fontSize: '20px'
+  }}
+  onClick={() => user.id !== undefined && handleDelete(user.id)}
+  title="Delete Admin"
+/>
                 </td>
               </tr>
             ))

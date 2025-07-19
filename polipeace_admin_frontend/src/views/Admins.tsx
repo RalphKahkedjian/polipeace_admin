@@ -24,19 +24,6 @@ export default function Admins() {
     getAdmins();
   }, []);
 
-  const handleDelete = (id: number) => {
-    if (window.confirm("Are you sure you want to delete this admin?")) {
-      axiosClient.delete(`/Admin/${id}`)
-        .then(() => {
-          setAdmins((prev) => prev.filter((admin) => admin.id !== id));
-        })
-        .catch((err) => {
-          console.error("Failed to delete admin:", err);
-          alert("Error deleting admin");
-        });
-    }
-  };
-
   const filteredAdmins = (admins ?? []).filter((admin) => {
     return admin.username.toLowerCase().includes(searchTerm.trim().toLowerCase());
   });
@@ -65,7 +52,6 @@ export default function Admins() {
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
             <th style={{ padding: '10px', border: '1px solid #ddd' }}>Age</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -76,21 +62,6 @@ export default function Admins() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.username}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.email}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{admin.age}</td>
-                <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
-                  <div
-                    onClick={() => handleDelete(admin.id)}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontSize: '2',
-                      color: 'red',
-                    }}
-                    title="Delete Admin"
-                  >
-                    🗑️
-                  </div>
-                </td>
               </tr>
             ))
           ) : (

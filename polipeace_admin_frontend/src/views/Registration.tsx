@@ -80,7 +80,7 @@ export default function Registration() {
                 onClick={registerUser}
               />
               <p className='mt-2' style={{fontSize:'.8em'}}>
-                Already have an account? <Link to='/login'> <span style={{color:'black', textDecoration:'underline'}}>Login</span></Link>
+                Already have an account? <Link to='/guest/login'> <span style={{color:'black', textDecoration:'underline'}}>Login</span></Link>
               </p>
             </div>
           </div>

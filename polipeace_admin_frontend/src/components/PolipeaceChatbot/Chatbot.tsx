@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axiosClient from '../../Services/axiosClient'; // assuming axios instance configured with baseURL
 
 const primaryColor = '#4B1F3E';
 const fadedColor = 'rgba(75, 31, 62, 0.4)';
@@ -9,27 +10,56 @@ interface Message {
 }
 
 interface ChatBoxProps {
-  initialMessages?: Message[]; // Allow passing initial messages for testing
+  initialMessages?: Message[];
 }
 
 const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-    const newMessage: Message = { sender: 'user', text: input };
-    setMessages((prev) => [...prev, newMessage]);
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return;
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiReply: Message = {
+    const userMessage: Message = { sender: 'user', text: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setLoading(true);
+
+    try {
+      // Correct axios post usage: (url, data)
+      const response = await axiosClient.post('/chatbot', { prompt: input });
+
+      // axios returns data in response.data
+      const data = response.data;
+
+      if (data.status) {
+        const aiMessage: Message = {
+          sender: 'ai',
+          text: data.data || 'No response from AI',
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+      } else {
+        const aiMessage: Message = {
+          sender: 'ai',
+          text: `⚠️ ${data.message || 'Error getting AI response'}`,
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+      }
+    } catch (error: any) {
+      const aiMessage: Message = {
         sender: 'ai',
-        text: `You said: ${input}`,
+        text: `⚠️ Network error or server unreachable.`,
       };
-      setMessages((prev) => [...prev, aiReply]);
-    }, 500);
+      setMessages((prev) => [...prev, aiMessage]);
+    } finally {
+      setLoading(false);
+    }
 
     setInput('');
   };
@@ -47,7 +77,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
         flexDirection: 'column',
         height: '500px',
         boxShadow: '-2px -3px 8px 5px #4B1F3E',
-        marginBottom:'40px'
+        marginBottom: '40px',
       }}
     >
       {/* Messages */}
@@ -67,19 +97,19 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
             style={{
               alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
               maxWidth: '70%',
-              padding: '10px 14px',  // Added comfortable padding here
+              padding: '10px 14px',
               borderRadius: '12px',
-              backgroundColor:
-                msg.sender === 'ai' ? primaryColor : fadedColor,
+              backgroundColor: msg.sender === 'ai' ? primaryColor : fadedColor,
               color: '#fff',
               fontSize: '15px',
               wordWrap: 'break-word',
-              whiteSpace: 'pre-wrap', // keep line breaks if any
+              whiteSpace: 'pre-wrap',
             }}
           >
             {msg.text}
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Input + Send button */}
@@ -91,15 +121,16 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
           padding: '8px',
           borderRadius: '10px',
           gap: '10px',
-          marginTop:'15px'
+          marginTop: '15px',
         }}
       >
         <input
           type="text"
-          placeholder="Type message..."
+          placeholder={loading ? 'Waiting for response...' : 'Type message...'}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          disabled={loading}
           style={{
             flex: 1,
             padding: '15px 10px',
@@ -114,13 +145,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
         />
         <button
           onClick={sendMessage}
+          disabled={loading}
           style={{
             width: 'auto',
-            backgroundColor: primaryColor,
+            backgroundColor: loading ? '#8b476fff' : primaryColor,
             color: 'whitesmoke',
             border: 'none',
             borderRadius: '8px',
-            cursor: 'pointer',
+            cursor: loading ? 'not-allowed' : 'pointer',
             fontWeight: 'normal',
             height: '40px',
             display: 'flex',
@@ -128,10 +160,10 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
             justifyContent: 'center',
             padding: '15px',
             marginBottom: 0,
-            marginTop:0
+            marginTop: 0,
           }}
         >
-          Send
+          {loading ? 'Sending...' : 'Send'}
         </button>
       </div>
     </div>

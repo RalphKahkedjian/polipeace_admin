@@ -11,7 +11,7 @@ import { useStateContext } from '../contexts/contextProvider';
 export default function Login() {
 
   const navigate = useNavigate()
-  const {setUser, setToken, setEmail, setAge, setID, setProfilePic} = useStateContext()
+  const {setUser, setToken, setEmail, setAge, setID} = useStateContext()
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -37,7 +37,6 @@ export default function Login() {
       setEmail(data.admin.email)
       setAge(data.admin.age)
       setID(data.admin.id)
-      setProfilePic(data.admin.profilePictureURL)
       navigate('/');
     })
     .catch(err=> {
@@ -72,7 +71,7 @@ export default function Login() {
                 onClick={registerUser}
               />
               <p className='mt-3' style={{fontSize:'.8em'}}>
-                Don't have an account? <Link to='/register'> <span style={{color:'black', textDecoration:'underline'}}>Register</span></Link>
+                Don't have an account? <Link to='/guest/register'> <span style={{color:'black', textDecoration:'underline'}}>Register</span></Link>
               </p>
             </div>
           </div>

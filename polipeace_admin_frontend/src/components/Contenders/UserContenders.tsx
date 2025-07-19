@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import CircularProgress from '../Charts/User_Contender_Circular_Graph';
 import '../Contenders/UserContenders.css';
 
@@ -17,7 +18,7 @@ export default function UserContenders({
   emailUser2,
 }: UserContenderProps) {
   return (
-    <div className="user-contender-container container mt-4">
+    <div className="user-contender-container mt-4">
       <div className="row align-items-center">
         {/* User Info */}
         <div className="col-md-6">
@@ -35,12 +36,14 @@ export default function UserContenders({
             </p>
           </div>
         </div>
-
         {/* Circular Graph */}
         <div className="col-md-6 text-center">
           <CircularProgress percentage={75} secondaryPercentage={25} user1Name={user1} user2Name={user2} />
         </div>
       </div>
+      <p>
+        <Link to='/votes'><u className='text-dark'>Go to voting page</u></Link>
+      </p>
     </div>
   );
 }

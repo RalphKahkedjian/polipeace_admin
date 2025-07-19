@@ -7,36 +7,92 @@ use Illuminate\Support\Facades\Http;
 
 class ChatbotController extends Controller
 {
-    public function sendChatbot(Request $request)
-    {
-        // Log the API Key for debugging
-        \Log::info('OPENAI_API_KEY: ' . env('OPENAI_API_KEY'));
+public function sendChatbot(Request $request)
+{
+    $prompt = strtolower(trim($request->input('prompt')));
 
-        // Make the API request to OpenAI's chat endpoint with SSL verification turned off
-        $response = Http::withToken(env('OPENAI_API_KEY'))
-                        ->withoutVerifying() // Disable SSL certificate verification
-                        ->post('https://api.openai.com/v1/chat/completions', [
-                            'model' => 'gpt-3.5-turbo', // Model being used
-                            'messages' => $request->input('messages'), // Messages sent by the user
-                        ]);
-
-        // Check if the response is successful
-        if ($response->successful()) {
-            // Extract the response from OpenAI
-            $chatbotResponse = $response->json(); // Parse JSON response
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Chatbot Request Accepted',
-                'data' => $chatbotResponse['choices'][0]['message'] ?? 'No response from GPT model', // Extracting the message
-            ]);
-        } else {
-            // Handle error if the request fails
-            return response()->json([
-                'status' => false,
-                'message' => 'Failed to contact OpenAI API',
-                'error' => $response->json(), // Return the error response from OpenAI
-            ], $response->status());
-        }
+    if (!$prompt) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Prompt is required.',
+        ], 400);
     }
+
+    // Define your custom Q&A list
+    $customAnswers = [
+        'who are you' => 'I am Polipeace ChatBot made by Ralph Kahkedjian. ',
+        'what is your name' => 'My name is Polipeace',
+        'how are you' => 'I am doing great, thank you for asking!',
+        'which party affiliation has the most followers' => 'party_most_followers',
+        'list the latest registered users' => 'latest_registered_users'
+    ];
+
+    if (array_key_exists($prompt, $customAnswers)) {
+
+        $answer = $customAnswers[$prompt];
+
+        if ($answer === 'party_most_followers') {
+            $sql = file_get_contents(database_path('sql/party_with_most_followers.sql'));
+            $result = \DB::selectOne($sql);
+
+        $answer = $result
+            ? "The party with the most followers is " . ucfirst($result->party_affiliation)
+            : "I don't have that info.";
+        }
+
+        else if ($answer === 'latest_registered_users') {
+            $sql = file_get_contents(database_path('sql/latest_registered_users.sql'));
+            $results = \DB::select($sql); 
+
+            if ($results && count($results) > 0) {
+                $answer = "The latest registered Polipeace users are:\n\n";
+
+                foreach ($results as $user) {
+                    $answer .= "- {$user->name} (joined on " . date('Y-m-d', strtotime($user->created_at)) . ")\n";
+                }
+            } else {
+                $answer = "No recent users found.";
+            }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Custom Answer',
+            'data' => $answer,
+        ]);
+    }
+
+    $contents = [
+        [
+            'parts' => [
+                ['text' => $request->input('prompt')]
+            ]
+        ]
+    ];
+
+    $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-goog-api-key' => env('GEMINI_API_KEY'),
+        ])
+        ->withoutVerifying()
+        ->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
+            'contents' => $contents
+        ]);
+
+    if ($response->successful()) {
+        $json = $response->json();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Chatbot Request Accepted',
+            'data' => $json['candidates'][0]['content']['parts'][0]['text'] ?? 'No response from Gemini model',
+        ]);
+    } else {
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to contact Gemini API',
+            'error' => $response->json(),
+        ], $response->status());
+    }
+   }
+  }
 }

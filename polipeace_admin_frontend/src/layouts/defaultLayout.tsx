@@ -32,7 +32,7 @@ export default function DefaultLayout() {
   const titlePage = getPageTitle(location.pathname);
 
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/guest/login" />;
   }
 
   const handleLogout = () => {
