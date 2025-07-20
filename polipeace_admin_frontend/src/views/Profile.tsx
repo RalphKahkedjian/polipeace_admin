@@ -21,7 +21,7 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
-      <h2 className='mt-2 text-start'>{user}'s Profile</h2>
+      <h2 className='mt-2 text-start fw-normal'>{user}'s Profile</h2>
       <div className="profile-info">
         <div className="form-row">
           <label className='text-white'>ID</label>

@@ -16,7 +16,6 @@ interface ChatBoxProps {
 const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
   const localStorageKey = `chat_messages_${userId}`;
 
-  // Load saved messages for this user
   const [messages, setMessages] = useState<Message[]>(() => {
     const saved = localStorage.getItem(localStorageKey);
     return saved ? JSON.parse(saved) : initialMessages;
@@ -26,12 +25,11 @@ const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Save messages per user to localStorage
+
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(messages));
   }, [messages, localStorageKey]);
@@ -56,7 +54,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { sender: 'ai', text: '⚠️ Network error or server unreachable.' },
+        { sender: 'ai', text: 'Network error or server unreachable.' },
       ]);
     } finally {
       setLoading(false);
@@ -80,7 +78,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
         marginBottom: '40px',
       }}
     >
-      {/* Messages List */}
       <div
         style={{
           flex: 1,
@@ -113,7 +110,6 @@ const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Box */}
       <div
         style={{
           display: 'flex',

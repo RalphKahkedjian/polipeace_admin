@@ -5,6 +5,7 @@ import Registration from "./views/Registration";
 import Login from "./views/Login";
 import NotFound from "./views/NotFound";
 import Dashboard from "./views/Dashboard";
+import Meeting from "./views/Meeting";
 import Admins from "./views/Admins";
 import Users from "./views/Users";
 import Profile from "./views/Profile";
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: 'users', element: <Users /> },
       { path: 'users/new', element: <UserForm />},
       { path: 'profile', element: <Profile />},
+      { path: 'meetings', element: <Meeting />},
       { path: '*', element: <NotFound />}
     ]
   },

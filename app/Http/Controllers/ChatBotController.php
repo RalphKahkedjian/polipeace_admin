@@ -24,6 +24,7 @@ public function sendChatbot(Request $request)
         'what is your name' => 'My name is Polipeace',
         'how are you' => 'I am doing great, thank you for asking!',
         'which party affiliation has the most followers' => 'party_most_followers',
+        'which party affiliation has the least followers' => 'party_least_followers',
         'can you list the latest registered users' => 'latest_registered_users',
     ];
 
@@ -37,7 +38,17 @@ public function sendChatbot(Request $request)
             $answer = $result
                 ? "The party with the most followers is " . ucfirst($result->party_affiliation)
                 : "I don't have that info.";
-        } 
+        }
+
+        else if ($answer === 'party_least_followers') {
+            $sql = file_get_contents(database_path('sql/party_with_least_followers.sql'));
+            $result = \DB::selectOne($sql);
+
+            $answer = $result
+                ? "The party with the least followers is " . ucfirst($result->party_affiliation)
+                : "I don't have that info.";
+        }
+        
         else if ($answer === 'latest_registered_users') {
             $sql = file_get_contents(database_path('sql/latest_registered_users.sql'));
             $results = \DB::select($sql); 
