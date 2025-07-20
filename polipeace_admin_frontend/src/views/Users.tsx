@@ -46,7 +46,7 @@ export default function Users() {
     <div style={{ marginTop: '70px' }}>
       <input
         type="text"
-        placeholder="🔍 Search a user..."
+        placeholder="Search a user..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{

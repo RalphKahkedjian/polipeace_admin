@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axiosClient from '../../Services/axiosClient'; // assuming axios instance configured with baseURL
+import axiosClient from '../../Services/axiosClient';
 
 const primaryColor = '#4B1F3E';
-const fadedColor = 'rgba(75, 31, 62, 0.4)';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -10,19 +9,32 @@ interface Message {
 }
 
 interface ChatBoxProps {
+  userId: string;
   initialMessages?: Message[];
 }
 
-const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
+  const localStorageKey = `chat_messages_${userId}`;
+
+  // Load saved messages for this user
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem(localStorageKey);
+    return saved ? JSON.parse(saved) : initialMessages;
+  });
+
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when messages update
+  // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Save messages per user to localStorage
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(messages));
+  }, [messages, localStorageKey]);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -32,36 +44,24 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
     setLoading(true);
 
     try {
-      // Correct axios post usage: (url, data)
       const response = await axiosClient.post('/chatbot', { prompt: input });
-
-      // axios returns data in response.data
       const data = response.data;
 
-      if (data.status) {
-        const aiMessage: Message = {
-          sender: 'ai',
-          text: data.data || 'No response from AI',
-        };
-        setMessages((prev) => [...prev, aiMessage]);
-      } else {
-        const aiMessage: Message = {
-          sender: 'ai',
-          text: `⚠️ ${data.message || 'Error getting AI response'}`,
-        };
-        setMessages((prev) => [...prev, aiMessage]);
-      }
-    } catch (error: any) {
       const aiMessage: Message = {
         sender: 'ai',
-        text: `⚠️ Network error or server unreachable.`,
+        text: data.status ? data.data || 'No response from AI' : `⚠️ ${data.message || 'Error from AI'}`,
       };
+
       setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { sender: 'ai', text: '⚠️ Network error or server unreachable.' },
+      ]);
     } finally {
       setLoading(false);
+      setInput('');
     }
-
-    setInput('');
   };
 
   return (
@@ -80,7 +80,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
         marginBottom: '40px',
       }}
     >
-      {/* Messages */}
+      {/* Messages List */}
       <div
         style={{
           flex: 1,
@@ -99,7 +99,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
               maxWidth: '70%',
               padding: '10px 14px',
               borderRadius: '12px',
-              backgroundColor: msg.sender === 'ai' ? primaryColor : fadedColor,
+              backgroundColor:
+                msg.sender === 'ai' ? primaryColor : 'rgba(82, 37, 69, 0.73)',
               color: '#fff',
               fontSize: '15px',
               wordWrap: 'break-word',
@@ -112,7 +113,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ initialMessages = [] }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input + Send button */}
+      {/* Input Box */}
       <div
         style={{
           display: 'flex',

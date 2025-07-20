@@ -32,7 +32,7 @@ export default function Admins() {
     <div style={{ marginTop: '70px' }}>
       <input
         type="text"
-        placeholder="🔍 Search an admin..."
+        placeholder="Search an admin..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{

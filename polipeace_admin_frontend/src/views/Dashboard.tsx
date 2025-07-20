@@ -6,12 +6,15 @@ import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Grap
 import UserContenders from "../components/Contenders/UserContenders";
 import CircularProgress from "../components/Charts/User_Contender_Circular_Graph";
 import ChatBox from "../components/PolipeaceChatbot/Chatbot";
+import { useStateContext } from "../contexts/contextProvider";
 
 
 export default function Dashboard() {
 
   const [userCount, setUserCount] = useState(0)
   const [adminCount, setAdminCount] = useState(0)
+
+  const {id} = useStateContext();
 
 
   const date = new Date()
@@ -84,7 +87,7 @@ export default function Dashboard() {
             <h3>
               Polipeace Chatbot
             </h3>
-            <ChatBox />
+            <ChatBox userId={id} />
           </div>
           <div>
           </div>

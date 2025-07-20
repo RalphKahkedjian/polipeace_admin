@@ -24,22 +24,20 @@ public function sendChatbot(Request $request)
         'what is your name' => 'My name is Polipeace',
         'how are you' => 'I am doing great, thank you for asking!',
         'which party affiliation has the most followers' => 'party_most_followers',
-        'list the latest registered users' => 'latest_registered_users'
+        'can you list the latest registered users' => 'latest_registered_users',
     ];
 
     if (array_key_exists($prompt, $customAnswers)) {
-
         $answer = $customAnswers[$prompt];
 
         if ($answer === 'party_most_followers') {
             $sql = file_get_contents(database_path('sql/party_with_most_followers.sql'));
             $result = \DB::selectOne($sql);
 
-        $answer = $result
-            ? "The party with the most followers is " . ucfirst($result->party_affiliation)
-            : "I don't have that info.";
-        }
-
+            $answer = $result
+                ? "The party with the most followers is " . ucfirst($result->party_affiliation)
+                : "I don't have that info.";
+        } 
         else if ($answer === 'latest_registered_users') {
             $sql = file_get_contents(database_path('sql/latest_registered_users.sql'));
             $results = \DB::select($sql); 
@@ -53,7 +51,9 @@ public function sendChatbot(Request $request)
             } else {
                 $answer = "No recent users found.";
             }
+        }
 
+        // Return the custom answer in **all cases** here
         return response()->json([
             'status' => true,
             'message' => 'Custom Answer',
@@ -61,10 +61,11 @@ public function sendChatbot(Request $request)
         ]);
     }
 
+    // If prompt is NOT in custom answers, call Gemini API normally
     $contents = [
         [
             'parts' => [
-                ['text' => $request->input('prompt')]
+                ['text' => $prompt]
             ]
         ]
     ];
@@ -93,6 +94,6 @@ public function sendChatbot(Request $request)
             'error' => $response->json(),
         ], $response->status());
     }
-   }
-  }
+}
+
 }

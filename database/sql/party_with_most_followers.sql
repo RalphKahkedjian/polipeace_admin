@@ -1,5 +1,11 @@
 SELECT party_affiliation, COUNT(*) AS total_count
 FROM users
 GROUP BY party_affiliation
-ORDER BY total_count DESC
-LIMIT 1
+HAVING COUNT(*) = (
+  SELECT MAX(counts)
+  FROM (
+    SELECT COUNT(*) AS counts
+    FROM users
+    GROUP BY party_affiliation
+  ) AS subquery
+);

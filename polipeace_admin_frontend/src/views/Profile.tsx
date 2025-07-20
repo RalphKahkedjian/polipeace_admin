@@ -21,13 +21,8 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
+      <h2 className='mt-2 text-start'>{user}'s Profile</h2>
       <div className="profile-info">
-        <div className='d-flex' style={{ gap: '30px' }}>
-          <div className='mt-5 profile-description fs-5'>
-              We are happy to have you as a Polipeace admin {user}! Below is all your profile details.
-          </div>
-        </div>
-
         <div className="form-row">
           <label className='text-white'>ID</label>
           <input type="text" value={id} disabled />
