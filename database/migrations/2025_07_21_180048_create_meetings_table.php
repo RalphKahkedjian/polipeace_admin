@@ -20,7 +20,9 @@ return new class extends Migration
                 'pending',
                 'cancelled'
             ]);
+            $table->string('date');
             $table->string('countdown')->nullable();
+            $table->timestamp('time');
             $table->timestamps();
         });
     }
