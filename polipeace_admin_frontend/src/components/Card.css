@@ -5,13 +5,16 @@
 }
 
 .card-container {
-  text-align: start;
-  justify-content: center;
-  width: 320px;
+  max-width: 900px;
+  min-width: 380px;
   height: auto;
+  flex-shrink: 0;
   background-color: #F2F2F2;
-  color: #4B1F3E;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   box-shadow: 5px 5px 6px #4B1F3E;
-  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
 }

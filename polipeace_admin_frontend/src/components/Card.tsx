@@ -9,7 +9,7 @@ interface CardProps {
 
 export default function Card({title, description, redirection}: CardProps) {
   return (
-    <div className='card-container p-3'>
+    <div className='card-container p-3' style={{width:'auto', padding:'40px'}}>
       <div className='d-block'>
         <h4 className='fw-normal'>
           {title}

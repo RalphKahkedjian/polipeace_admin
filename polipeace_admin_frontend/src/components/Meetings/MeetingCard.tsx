@@ -14,9 +14,9 @@ interface MeetingCardProps {
 }
 
 const statusColorMap: Record<MeetingStatus, string> = {
-  confirmed: '#4BB543',
-  pending: '#F5A623',
-  cancelled: '#FF4D4F',
+  confirmed: '#296e24ff',
+  pending: '#b67712ff',
+  cancelled: '#a43638ff',
 };
 
 export default function MeetingCard({

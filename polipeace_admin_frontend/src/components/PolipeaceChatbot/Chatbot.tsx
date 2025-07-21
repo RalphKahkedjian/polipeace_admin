@@ -25,10 +25,16 @@ const ChatBox: React.FC<ChatBoxProps> = ({ userId, initialMessages = [] }) => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // Scroll only if a message was added (not initial load)
+  const previousMessageCount = useRef(messages.length);
 
+  useEffect(() => {
+    const newMessageAdded = messages.length > previousMessageCount.current;
+    if (newMessageAdded) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    previousMessageCount.current = messages.length;
+  }, [messages]);
 
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(messages));

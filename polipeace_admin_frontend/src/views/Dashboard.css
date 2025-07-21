@@ -1,0 +1,26 @@
+.horizontal-scroll {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 35px 10px;
+  scroll-behavior: smooth;
+  cursor: grab;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.horizontal-scroll:active {
+  cursor: grabbing;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.card-link {
+  text-decoration: underline;
+  color: #4B1F3E;
+  font-weight: 350;
+}
