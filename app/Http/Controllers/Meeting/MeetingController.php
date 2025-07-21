@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers\Meeting;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\MeetingRequests\MeetingRequest;
+use App\Models\Meeting;
+use Illuminate\Http\Request;
+
+class MeetingController extends Controller
+{
+    // Method to create a new meeting
+public function scheduleMeeting(MeetingRequest $request) {
+    $meeting = Meeting::create($request->validated());
+
+    return response()->json([
+        "status" => true,
+        "message" => "Meeting appointed successfully",
+        "details" => [
+            "name" => $meeting->name,
+            "location" => $meeting->location,
+            "status" => $meeting->status,
+            "countdown" => $meeting->countdown,
+            "time" => $meeting->time,
+            "date" => $meeting->date,
+        ]
+    ]);
+}
+}

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Authentication\AdminController;
 use App\Http\Controllers\Authentication\UserController;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\Meeting\MeetingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client as GuzzleClient;
@@ -29,6 +30,9 @@ Route::post('/User/Register', [UserController::class, 'register']);
 Route::post('/User/Login', [UserController::class, 'login']);
 Route::get('/User/Users', [UserController::class, 'getUsers']);
 Route::delete('/User/{user}', [UserController::class, 'deleteUser']);
+
+//Meetings Routes
+Route::post('/Meeting/Add', [MeetingController::class, 'scheduleMeeting']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
 

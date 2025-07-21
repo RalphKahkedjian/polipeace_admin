@@ -22,7 +22,7 @@ return new class extends Migration
             ]);
             $table->string('date');
             $table->string('countdown')->nullable();
-            $table->timestamp('time');
+            $table->string('time');
             $table->timestamps();
         });
     }
