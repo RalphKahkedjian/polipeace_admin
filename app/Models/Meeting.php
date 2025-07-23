@@ -13,7 +13,7 @@ class Meeting extends Model
         'name',
         'location',
         'status',
-        'countdown',
+        'duration',
         'time',
         'date'
     ];

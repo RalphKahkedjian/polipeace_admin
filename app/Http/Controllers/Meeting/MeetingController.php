@@ -21,7 +21,7 @@ public function scheduleMeeting(MeetingRequest $request) {
             "name" => $meeting->name,
             "location" => $meeting->location,
             "status" => $meeting->status,
-            "countdown" => $meeting->countdown,
+            "duration" => $meeting->duration,
             "time" => $meeting->time,
             "date" => $meeting->date,
         ]

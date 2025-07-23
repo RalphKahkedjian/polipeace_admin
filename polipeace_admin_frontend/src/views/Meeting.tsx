@@ -23,31 +23,52 @@ export enum MeetingStatus {
 export default function Meeting() {
   const [filterStatus, setFilterStatus] = useState<MeetingStatus | "all">("all");
   const [meetings, setMeetings] = useState<Meeting[]>([]);
+  const [filteredMeetings, setFilteredMeetings] = useState<Meeting[]>([]); // Cache the filtered meetings
 
   const navigate = useNavigate();
 
+  // Fetching the meetings from the API
   useEffect(() => {
     axiosClient
-      .get<Meeting[]>("/meetings")
+      .get<{ status: boolean; message: string; meetings: Meeting[] }>("/Meeting/Show")
       .then((res) => {
-        setMeetings(res.data);
+        if (res.data.status) {
+          setMeetings(res.data.meetings);
+        } else {
+          console.error("No meetings found");
+        }
       })
       .catch((err) => {
         console.error("Failed to fetch meetings", err);
       });
   }, []);
 
+  // Function to check if the meeting is today
   const isToday = (dateStr: string) => {
     const today = dayjs().format("MMMM D");
     return dateStr.toLowerCase().includes(today.toLowerCase());
   };
 
+  // Categorize meetings into 'Today' and 'Upcoming'
   const todayMeetings = meetings.filter((m) => isToday(m.date));
   const upcomingMeetings = meetings.filter((m) => !isToday(m.date));
 
-  const filterMeetings = (list: Meeting[]) =>
-    list.filter((m) => filterStatus === "all" || m.status === filterStatus);
+  // Filter meetings based on status and cache the results
+  const filterMeetings = (list: Meeting[], status: MeetingStatus | "all") => {
+    if (status === "all") {
+      return list;
+    }
+    return list.filter((meeting) => meeting.status === status);
+  };
 
+  // Update filtered meetings when status filter changes
+  useEffect(() => {
+    const filteredTodayMeetings = filterMeetings(todayMeetings, filterStatus);
+    const filteredUpcomingMeetings = filterMeetings(upcomingMeetings, filterStatus);
+    setFilteredMeetings([...filteredTodayMeetings, ...filteredUpcomingMeetings]);
+  }, [filterStatus, meetings]); // Re-filter when meetings or filterStatus changes
+
+  // Handle filter status change
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as MeetingStatus | "all";
     setFilterStatus(value);
@@ -86,26 +107,12 @@ export default function Meeting() {
           gap: "5px",
         }}
       >
-        {filterMeetings(todayMeetings).length > 0 && (
-          <div>
-            <h2 className="fw-normal mb-3" style={{ color: "#4B1F3E" }}>
-              Today
-            </h2>
-            {filterMeetings(todayMeetings).map((m, idx) => (
-              <MeetingCard key={idx} {...m} />
-            ))}
-          </div>
-        )}
-
-        {filterMeetings(upcomingMeetings).length > 0 && (
-          <div>
-            <h2 className="fw-normal mt-4 mb-3" style={{ color: "#4B1F3E" }}>
-              Upcoming
-            </h2>
-            {filterMeetings(upcomingMeetings).map((m, idx) => (
-              <MeetingCard key={idx} {...m} />
-            ))}
-          </div>
+        {filteredMeetings.length > 0 ? (
+          filteredMeetings.map((m, idx) => (
+            <MeetingCard key={m.id} {...m} />
+          ))
+        ) : (
+          <p>No meetings found for the selected filter.</p>
         )}
       </div>
 
@@ -131,7 +138,7 @@ export default function Meeting() {
             fontSize: "1.7em",
             textAlign: "center",
           }}
-          onClick={()=>navigate('/meetings/new')}
+          onClick={() => navigate("/meetings/new")}
         >
           +
         </button>

@@ -21,7 +21,7 @@ return new class extends Migration
                 'cancelled'
             ]);
             $table->string('date');
-            $table->string('countdown')->nullable();
+            $table->string('duration');
             $table->string('time');
             $table->timestamps();
             $table->unique(['name', 'location', 'date']);

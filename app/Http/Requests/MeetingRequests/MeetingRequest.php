@@ -25,7 +25,7 @@ class MeetingRequest extends FormRequest
             'name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'status' => 'required|in:confirmed,pending,cancelled',
-            'countdown' => 'nullable|string|max:255',
+            'duration' => 'nullable|string|max:255',
             'time' => 'nullable|string|max:255',
             'date' => 'required|string|max:80'
         ];

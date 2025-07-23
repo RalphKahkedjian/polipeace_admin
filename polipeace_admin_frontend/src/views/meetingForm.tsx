@@ -9,7 +9,7 @@ export default function MeetingForm() {
     location: '',
     status: 'pending',
     date: '',
-    countdown: '',
+    duration: '',
     time: ''
   });
 
@@ -59,8 +59,8 @@ const handleSubmit = async (e: React.FormEvent) => {
         <label>Enter meeting date</label>
         <input type="text" name="date" placeholder="Date" value={form.date} onChange={handleChange} required />
         
-        <label>Enter meeting countdown</label>
-        <input type="text" name="countdown" placeholder="Countdown" value={form.countdown} onChange={handleChange} />
+        <label>Enter meeting duration</label>
+        <input type="text" name="duration" placeholder="duration (approx)" value={form.duration} onChange={handleChange} />
         
         <label>Enter meeting time</label>
         <input type="text" name="time" placeholder="Time" value={form.time} onChange={handleChange} required />

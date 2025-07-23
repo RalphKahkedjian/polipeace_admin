@@ -6,7 +6,7 @@ export enum MeetingStatus {
 
 interface MeetingCardProps {
   time: string;
-  countdown: string;
+  duration: string;
   name: string;
   location: string;
   date: string;
@@ -21,7 +21,7 @@ const statusColorMap: Record<MeetingStatus, string> = {
 
 export default function MeetingCard({
   time,
-  countdown,
+  duration,
   name,
   location,
   date,
@@ -44,7 +44,7 @@ export default function MeetingCard({
       {/* Time & Countdown */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
         <div style={{ fontWeight: 600, fontSize: '1.7em' }}>{time}</div>
-        <div style={{ fontSize: '1em', color: '#888' }}>{countdown}</div>
+        <div style={{ fontSize: '1em', color: '#888' }}>{duration}</div>
       </div>
 
       {/* Divider */}

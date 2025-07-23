@@ -4,7 +4,7 @@ export interface Meeting {
   location: string,
   status: MeetingStatus,
   date: string,
-  countdown: string,
+  duration: string,
   time: string
 }
 
