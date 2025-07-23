@@ -33,6 +33,7 @@ Route::delete('/User/{user}', [UserController::class, 'deleteUser']);
 
 //Meetings Routes
 Route::post('/Meeting/Add', [MeetingController::class, 'scheduleMeeting']);
+Route::get('/Meeting/Show', [MeetingController::class, 'showMeeting']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
 

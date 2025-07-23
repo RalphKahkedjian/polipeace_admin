@@ -26,5 +26,22 @@ public function scheduleMeeting(MeetingRequest $request) {
             "date" => $meeting->date,
         ]
     ]);
-}
+  }
+
+  public function showMeeting() {
+    $meetings = Meeting::all();
+
+    if(!$meetings->isEmpty()) {
+        return response()->json([
+            "status" => true,
+            "message" => "Meetings List Below: ",
+            "meetings" => $meetings
+        ], 200);
+    }
+
+    return response()->json([
+        "status" => false,
+        "message" => "No meetings scheduled"
+    ], 404);
+  }
 }
