@@ -19,14 +19,16 @@ public function sendChatbot(Request $request)
     }
 
     // Define your custom Q&A list
-    $customAnswers = [
-        'who are you' => 'I am Polipeace ChatBot made by Ralph Kahkedjian. ',
-        'what is your name' => 'My name is Polipeace',
-        'how are you' => 'I am doing great, thank you for asking!',
-        'which party affiliation has the most followers' => 'party_most_followers',
-        'which party affiliation has the least followers' => 'party_least_followers',
-        'can you list the latest registered users' => 'latest_registered_users',
-    ];
+$customAnswers = [
+    'who are you' => 'I am Polipeace ChatBot made by Ralph Kahkedjian.',
+    'what is your name' => 'My name is Polipeace',
+    'how are you' => 'I am doing great, thank you for asking!',
+    'which party affiliation has the most followers' => 'party_most_followers',
+    'which party affiliation has the least followers' => 'party_least_followers',
+    'can you list the latest registered users' => 'latest_registered_users',
+    'what is polipeace about' => 'Polipeace is about bringing together Lebanese people from different political groups to unite and discuss their views and freedom in a peaceful, open, and respectful way. It\'s focused on fostering dialogue where everyone can express themselves, with an emphasis on peace and mutual understanding.'
+];
+
 
     if (array_key_exists($prompt, $customAnswers)) {
         $answer = $customAnswers[$prompt];

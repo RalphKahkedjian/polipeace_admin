@@ -17,6 +17,7 @@ public function scheduleMeeting(MeetingRequest $request) {
         "status" => true,
         "message" => "Meeting appointed successfully",
         "details" => [
+            "id" => $meeting->id,
             "name" => $meeting->name,
             "location" => $meeting->location,
             "status" => $meeting->status,

@@ -1,4 +1,4 @@
-import './Profile.css';
+import '../styles/Profile.css'
 import { useStateContext } from '../contexts/contextProvider';
 import axiosClient from '../Services/axiosClient';
 

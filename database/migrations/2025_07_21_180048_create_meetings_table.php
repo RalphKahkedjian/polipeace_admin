@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('countdown')->nullable();
             $table->string('time');
             $table->timestamps();
+            $table->unique(['name', 'location', 'date']);
         });
     }
 

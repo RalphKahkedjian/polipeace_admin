@@ -6,7 +6,7 @@ import Party_Affiliation_Graph from "../components/Charts/Party_Affiliation_Grap
 import UserContenders from "../components/Contenders/UserContenders";
 import ChatBox from "../components/PolipeaceChatbot/Chatbot";
 import { useStateContext } from "../contexts/contextProvider";
-import '../views/Dashboard.css'
+import '../styles/Dashboard.css'
 
 export default function Dashboard() {
   const [userCount, setUserCount] = useState(0);

@@ -1,45 +1,52 @@
-import React, { useState } from "react";
-import MeetingCard, { MeetingStatus } from "../components/Meetings/MeetingCard";
+import React, { useEffect, useState } from "react";
+import MeetingCard from "../components/Meetings/MeetingCard";
+import axiosClient from "../Services/axiosClient";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+
+export interface Meeting {
+  id: number;
+  name: string;
+  location: string;
+  status: MeetingStatus;
+  date: string;
+  countdown: string;
+  time: string;
+}
+
+export enum MeetingStatus {
+  confirmed = "confirmed",
+  pending = "pending",
+  cancelled = "cancelled",
+}
 
 export default function Meeting() {
   const [filterStatus, setFilterStatus] = useState<MeetingStatus | "all">("all");
+  const [meetings, setMeetings] = useState<Meeting[]>([]);
 
-  const allMeetings = [
-    {
-      section: "Today",
-      meetings: [
-        {
-          time: "11:00 AM",
-          countdown: "45 minutes",
-          name: "John Doe",
-          location: "The Foundry",
-          date: "September 15th",
-          status: MeetingStatus.confirmed,
-        },
-      ],
-    },
-    {
-      section: "Upcoming",
-      meetings: [
-        {
-          time: "11:00 AM",
-          countdown: "45 minutes",
-          name: "John Doe",
-          location: "The Foundry",
-          date: "September 15th",
-          status: MeetingStatus.pending,
-        },
-        {
-          time: "11:00 AM",
-          countdown: "45 minutes",
-          name: "John Doe",
-          location: "The Foundry",
-          date: "September 15th",
-          status: MeetingStatus.cancelled,
-        },
-      ],
-    },
-  ];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axiosClient
+      .get<Meeting[]>("/meetings")
+      .then((res) => {
+        setMeetings(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch meetings", err);
+      });
+  }, []);
+
+  const isToday = (dateStr: string) => {
+    const today = dayjs().format("MMMM D");
+    return dateStr.toLowerCase().includes(today.toLowerCase());
+  };
+
+  const todayMeetings = meetings.filter((m) => isToday(m.date));
+  const upcomingMeetings = meetings.filter((m) => !isToday(m.date));
+
+  const filterMeetings = (list: Meeting[]) =>
+    list.filter((m) => filterStatus === "all" || m.status === filterStatus);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as MeetingStatus | "all";
@@ -79,24 +86,27 @@ export default function Meeting() {
           gap: "5px",
         }}
       >
-        {allMeetings.map((sectionData) => {
-          const visibleMeetings = sectionData.meetings.filter(
-            (m) => filterStatus === "all" || m.status === filterStatus
-          );
+        {filterMeetings(todayMeetings).length > 0 && (
+          <div>
+            <h2 className="fw-normal mb-3" style={{ color: "#4B1F3E" }}>
+              Today
+            </h2>
+            {filterMeetings(todayMeetings).map((m, idx) => (
+              <MeetingCard key={idx} {...m} />
+            ))}
+          </div>
+        )}
 
-          if (visibleMeetings.length === 0) return null;
-
-          return (
-            <div key={sectionData.section}>
-              <h2 className="fw-normal mb-3" style={{ color: "#4B1F3E" }}>
-                {sectionData.section}
-              </h2>
-              {visibleMeetings.map((m, idx) => (
-                <MeetingCard key={idx} {...m} />
-              ))}
-            </div>
-          );
-        })}
+        {filterMeetings(upcomingMeetings).length > 0 && (
+          <div>
+            <h2 className="fw-normal mt-4 mb-3" style={{ color: "#4B1F3E" }}>
+              Upcoming
+            </h2>
+            {filterMeetings(upcomingMeetings).map((m, idx) => (
+              <MeetingCard key={idx} {...m} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Floating Add Button */}
@@ -121,6 +131,7 @@ export default function Meeting() {
             fontSize: "1.7em",
             textAlign: "center",
           }}
+          onClick={()=>navigate('/meetings/new')}
         >
           +
         </button>
