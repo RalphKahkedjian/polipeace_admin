@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Announcement\AnnouncementController;
 use App\Http\Controllers\Authentication\AdminController;
 use App\Http\Controllers\Authentication\UserController;
 use App\Http\Controllers\ChatbotController;
@@ -34,6 +35,9 @@ Route::delete('/User/{user}', [UserController::class, 'deleteUser']);
 //Meetings Routes
 Route::post('/Meeting/Add', [MeetingController::class, 'scheduleMeeting']);
 Route::get('/Meeting/Show', [MeetingController::class, 'showMeeting']);
+
+//Announcements Routes
+Route::post('/Announcement/Post', [AnnouncementController::class, 'postAnnouncement']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
 

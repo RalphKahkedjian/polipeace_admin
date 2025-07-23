@@ -10,7 +10,7 @@ export interface Meeting {
   location: string;
   status: MeetingStatus;
   date: string;
-  countdown: string;
+  duration: string;
   time: string;
 }
 
@@ -108,7 +108,7 @@ export default function Meeting() {
         }}
       >
         {filteredMeetings.length > 0 ? (
-          filteredMeetings.map((m, idx) => (
+          filteredMeetings.map((m) => (
             <MeetingCard key={m.id} {...m} />
           ))
         ) : (
