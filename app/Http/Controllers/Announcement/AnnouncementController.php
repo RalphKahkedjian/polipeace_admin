@@ -22,5 +22,25 @@ class AnnouncementController extends Controller
             ]
         ]);
     }
+
+    //method to get/fetch announcements
+    public function getAnnouncement() {
+        $announcement = Announcement::all();
+        if (!$announcement->isEmpty()) {
+            return response()->json([
+                "status" => true,
+                "announcement" => [
+                    "subject" => $announcement->subject,
+                    "description" => $announcement->description
+                ]
+            ], 200);
+        }
+
+        return response()->json([
+            "status" => false,
+            "message" => "No Announcements posted"
+        ], 404);
+    }
+
     //method to delete announcement
 }

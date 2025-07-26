@@ -38,6 +38,7 @@ Route::get('/Meeting/Show', [MeetingController::class, 'showMeeting']);
 
 //Announcements Routes
 Route::post('/Announcement/Post', [AnnouncementController::class, 'postAnnouncement']);
+Route::get('/Announcement/Show', [AnnouncementController::class, 'getAnnouncement']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
 
