@@ -29,10 +29,7 @@ class AnnouncementController extends Controller
         if (!$announcement->isEmpty()) {
             return response()->json([
                 "status" => true,
-                "announcement" => [
-                    "subject" => $announcement->subject,
-                    "description" => $announcement->description
-                ]
+                "announcement" => $announcement
             ], 200);
         }
 

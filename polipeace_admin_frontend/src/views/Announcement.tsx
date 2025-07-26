@@ -1,11 +1,45 @@
 import { useNavigate } from "react-router-dom"
+import axiosClient from "../Services/axiosClient"
+import { useEffect, useState } from "react"
+import AnnouncementCard from "../components/Announcements/AnnouncementCard"
 
 export default function Announcement() {
 
   const navigate = useNavigate()
 
+  const [announcements, setAnnouncements] = useState<any[]>([])
+
+  const getAnnouncements = async()=> {
+      return await axiosClient.get('/Announcement/Show').then((res)=> {
+      setAnnouncements(res.data.announcement);
+    })
+    .catch((err)=> {
+      console.log(err.response);
+    })
+  }
+
+  useEffect(()=> {
+    getAnnouncements()
+  }, [])
+
   return (
     <div>
+      <div style={{
+        margin: '80px 0 0 0'
+      }}>
+
+        {announcements.length > 0  ? 
+        <div>
+          {announcements.map((item, index)=> (
+            <div key={index} style={{margin:'40px 0 0 0'}}>
+              <AnnouncementCard subject={item.subject} description={item.description} />
+            </div>
+          ))}
+        </div>
+        :
+        <div></div>
+}
+      </div>
       <div
         style={{
           position: "fixed",

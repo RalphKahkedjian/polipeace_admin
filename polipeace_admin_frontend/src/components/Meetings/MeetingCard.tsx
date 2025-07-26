@@ -1,8 +1,4 @@
-export enum MeetingStatus {
-  confirmed = 'confirmed',
-  pending = 'pending',
-  cancelled = 'cancelled',
-}
+import { MeetingStatus } from "../../views/Meeting";
 
 interface MeetingCardProps {
   time: string;
