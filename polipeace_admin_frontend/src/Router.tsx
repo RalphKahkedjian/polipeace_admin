@@ -12,6 +12,8 @@ import Profile from "./views/Profile";
 import UserForm from "./views/userForm";
 import AdminForm from "./views/adminForm";
 import MeetingForm from "./views/meetingForm";
+import Announcement from "./views/Announcement";
+import AnnouncementForm from "./views/announcementForm";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
       { path: 'profile', element: <Profile />},
       { path: 'meetings', element: <Meeting />},
       { path: 'meetings/new', element: <MeetingForm />},
+      { path: 'announcements', element: <Announcement />},
+      { path: 'announcements/new', element: <AnnouncementForm />},
       { path: '*', element: <NotFound />}
     ]
   },

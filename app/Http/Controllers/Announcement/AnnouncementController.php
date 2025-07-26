@@ -18,7 +18,7 @@ class AnnouncementController extends Controller
             "message" => "Announcement posted successfully",
             "announcement" => [
                 "subject" => $announcement->subject,
-                "description" => $announcement->announcement
+                "description" => $announcement->description
             ]
         ]);
     }

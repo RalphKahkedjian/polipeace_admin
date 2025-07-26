@@ -23,7 +23,7 @@ export enum MeetingStatus {
 export default function Meeting() {
   const [filterStatus, setFilterStatus] = useState<MeetingStatus | "all">("all");
   const [meetings, setMeetings] = useState<Meeting[]>([]);
-  const [filteredMeetings, setFilteredMeetings] = useState<Meeting[]>([]); // Cache the filtered meetings
+  const [filteredMeetings, setFilteredMeetings] = useState<Meeting[]>([]);
 
   const navigate = useNavigate();
 
