@@ -14,6 +14,8 @@ import AdminForm from "./views/adminForm";
 import MeetingForm from "./views/meetingForm";
 import Announcement from "./views/Announcement";
 import AnnouncementForm from "./views/announcementForm";
+import Votes from "./views/Votes";
+import VotesForm from "./views/votesForm";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -29,6 +31,8 @@ const router = createBrowserRouter([
       { path: 'meetings/new', element: <MeetingForm />},
       { path: 'announcements', element: <Announcement />},
       { path: 'announcements/new', element: <AnnouncementForm />},
+      { path: 'votings', element: <Votes />},
+      { path: 'votings/new', element: <VotesForm />},
       { path: '*', element: <NotFound />}
     ]
   },

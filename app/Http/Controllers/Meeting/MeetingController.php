@@ -44,4 +44,13 @@ public function scheduleMeeting(MeetingRequest $request) {
         "message" => "No meetings scheduled"
     ], 404);
   }
+
+  public function deleteMeeting(Meeting $meeting) {
+    $meeting->delete();
+
+    return response()->json([
+        "status" => true,
+        "message" => "Meeting deleted successfully"
+    ]);
+  }
 }

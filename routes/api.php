@@ -35,10 +35,12 @@ Route::delete('/User/{user}', [UserController::class, 'deleteUser']);
 //Meetings Routes
 Route::post('/Meeting/Add', [MeetingController::class, 'scheduleMeeting']);
 Route::get('/Meeting/Show', [MeetingController::class, 'showMeeting']);
+Route::delete('/Meeting/Delete', [MeetingController::class, 'deleteMeeting']);
 
 //Announcements Routes
 Route::post('/Announcement/Post', [AnnouncementController::class, 'postAnnouncement']);
 Route::get('/Announcement/Show', [AnnouncementController::class, 'getAnnouncement']);
+Route::delete('/Announcement/Delete', [AnnouncementController::class, 'deleteAnnouncement']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
 

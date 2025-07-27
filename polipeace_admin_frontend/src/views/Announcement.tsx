@@ -32,12 +32,14 @@ export default function Announcement() {
         <div>
           {announcements.map((item, index)=> (
             <div key={index} style={{margin:'40px 0 0 0'}}>
-              <AnnouncementCard subject={item.subject} description={item.description} />
+              <AnnouncementCard subject={item.subject} description={item.description} id={item.id} />
             </div>
           ))}
         </div>
         :
-        <div></div>
+        <div>
+          No announcements posted
+        </div>
 }
       </div>
       <div

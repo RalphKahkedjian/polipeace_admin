@@ -83,16 +83,16 @@ export default function Users() {
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.age}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.sex}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
-<i
-  className="bi bi-trash"
-  style={{
-    cursor: 'pointer',
-    color: '#482653',
-    fontSize: '20px'
-  }}
-  onClick={() => user.id !== undefined && handleDelete(user.id)}
-  title="Delete Admin"
-/>
+                  <i
+                    className="bi bi-trash"
+                    style={{
+                      cursor: 'pointer',
+                      color: '#482653',
+                      fontSize: '20px'
+                    }}
+                    onClick={() => user.id !== undefined && handleDelete(user.id)}
+                    title="Delete Admin"
+                  />
                 </td>
               </tr>
             ))

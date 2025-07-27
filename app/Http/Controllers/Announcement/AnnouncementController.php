@@ -40,4 +40,11 @@ class AnnouncementController extends Controller
     }
 
     //method to delete announcement
+    public function deleteAnnouncement(Announcement $announcement) {
+        $announcement->delete();
+        return response()->json([
+            "status" => true,
+            "message" => "Announcement deleted successfully"
+        ], 200);
+    }
 }
