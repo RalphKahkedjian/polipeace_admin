@@ -91,7 +91,7 @@ export default function MeetingCard({
         <div style={{ fontWeight: 600, fontSize: '1.7em' }}>{date}</div>
         <div style={{ fontSize: '.9em', color: statusColorMap[status], fontWeight: 600 }}>
           {status.charAt(0).toUpperCase() + status.slice(1)}
-          <i className="bi bi-trash m-1" style={{
+          <i className="bi bi-trash m-3" style={{
             fontSize:'1.5em',
             color:'darkred'
           }}></i>

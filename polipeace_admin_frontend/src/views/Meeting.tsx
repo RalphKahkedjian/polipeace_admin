@@ -43,17 +43,15 @@ export default function Meeting() {
       });
   }, []);
 
-  // Function to check if the meeting is today
+
   const isToday = (dateStr: string) => {
     const today = dayjs().format("MMMM D");
     return dateStr.toLowerCase().includes(today.toLowerCase());
   };
 
-  // Categorize meetings into 'Today' and 'Upcoming'
   const todayMeetings = meetings.filter((m) => isToday(m.date));
   const upcomingMeetings = meetings.filter((m) => !isToday(m.date));
 
-  // Filter meetings based on status and cache the results
   const filterMeetings = (list: Meeting[], status: MeetingStatus | "all") => {
     if (status === "all") {
       return list;
@@ -61,12 +59,12 @@ export default function Meeting() {
     return list.filter((meeting) => meeting.status === status);
   };
 
-  // Update filtered meetings when status filter changes
+  
   useEffect(() => {
     const filteredTodayMeetings = filterMeetings(todayMeetings, filterStatus);
     const filteredUpcomingMeetings = filterMeetings(upcomingMeetings, filterStatus);
     setFilteredMeetings([...filteredTodayMeetings, ...filteredUpcomingMeetings]);
-  }, [filterStatus, meetings]); // Re-filter when meetings or filterStatus changes
+  }, [filterStatus, meetings]);
 
   // Handle filter status change
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

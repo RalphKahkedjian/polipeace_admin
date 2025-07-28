@@ -31,8 +31,8 @@ const router = createBrowserRouter([
       { path: 'meetings/new', element: <MeetingForm />},
       { path: 'announcements', element: <Announcement />},
       { path: 'announcements/new', element: <AnnouncementForm />},
-      { path: 'votings', element: <Votes />},
-      { path: 'votings/new', element: <VotesForm />},
+      { path: 'votes', element: <Votes />},
+      { path: 'votes/new', element: <VotesForm />},
       { path: '*', element: <NotFound />}
     ]
   },

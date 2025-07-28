@@ -11,6 +11,8 @@ import '../styles/Dashboard.css'
 export default function Dashboard() {
   const [userCount, setUserCount] = useState(0);
   const [adminCount, setAdminCount] = useState(0);
+  const [announcementCount, setAnnouncementCount] = useState(0);
+  const [meetingCount, setMeetingCount] = useState(0);
   const { id } = useStateContext();
 
   const getTypeCount = (
@@ -30,9 +32,31 @@ export default function Dashboard() {
       });
   };
 
+
   useEffect(() => {
     getTypeCount("Admin", setAdminCount);
     getTypeCount("User", setUserCount);
+      axiosClient.get('/Announcement/Show')
+  .then(({data})=> {
+    if (data.announcement) {
+      setAnnouncementCount(data.announcement.length)
+      console.log(data.announcement.length)
+    }
+  })
+  .catch((err)=> {
+    console.log("no announcements", err.response);
+  })
+
+    axiosClient.get('/Meeting/Show')
+  .then(({data})=> {
+    if (data.meetings) {
+      setMeetingCount(data.meetings.length)
+      console.log(data.meetings.length)
+    }
+  })
+  .catch((err)=> {
+    console.log("no meetings", err.response)
+  })
   }, []);
 
   // Drag logic
@@ -94,7 +118,7 @@ export default function Dashboard() {
           />
           <Card
             title="Announcements"
-            description={0}
+            description={announcementCount}
             redirection={
               <Link to="/announcements">
                 <span className="card-link">➥ Add / Remove Announcements</span>
@@ -103,10 +127,19 @@ export default function Dashboard() {
           />
           <Card
             title="Meetings"
-            description={0}
+            description={meetingCount}
             redirection={
               <Link to="/meetings">
                 <span className="card-link">➥ Add / Remove Meeting</span>
+              </Link>
+            }
+          />
+          <Card
+            title="Votes"
+            description={0}
+            redirection={
+              <Link to="/votes">
+                <span className="card-link">➥ Create / Delete Votings</span>
               </Link>
             }
           />
