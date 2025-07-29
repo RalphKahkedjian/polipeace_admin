@@ -31,4 +31,13 @@ class PostController extends Controller
         ]);
     }
     
+    public function index() {
+        $post = Post::all();
+        if(!$post->isEmpty()) {
+            return response()->json([
+                "message" => true,
+                "posts" => $post
+            ]);
+        }
+    }
 }
