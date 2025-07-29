@@ -24,10 +24,10 @@ export default function Posts() {
 
   return (
     <div style={{
-      marginTop:'80px',
+      marginTop:'60px',
     }}>
       {posts.map((post) => (
-        <div key={post.id} style={{padding: "30px", marginBottom: "30px" }}>
+        <div key={post.id} style={{padding: "0px", marginBottom: "30px" }}>
             <PostCard description={post.description} created_at={new Date(post.created_at).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',

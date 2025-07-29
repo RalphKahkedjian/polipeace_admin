@@ -143,6 +143,15 @@ export default function Dashboard() {
               </Link>
             }
           />
+            <Card
+            title="Posts"
+            description={0}
+            redirection={
+              <Link to="/posts">
+                <span className="card-link">➥ View / Delete Posts</span>
+              </Link>
+            }
+          />
         </div>
 
         <div className="w-75 h-75" style={{ marginTop: "70px" }}>
