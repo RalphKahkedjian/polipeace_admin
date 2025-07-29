@@ -24,22 +24,17 @@ export default function Posts() {
 
   return (
     <div style={{
-      marginTop:'80px'
+      marginTop:'80px',
     }}>
       {posts.map((post) => (
-        <div key={post.id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
-          <p><strong>User ID:</strong> {post.username}</p>
-          <p><strong>Description:</strong> {post.description}</p>
-          {post.picture_url && (
-            <img
-              src={post.picture_url}
-              alt={`Post ${post.id}`}
-              style={{ width: '200px', marginTop: '10px' }}
-            />
-          )}
+        <div key={post.id} style={{padding: "30px", marginBottom: "30px" }}>
+            <PostCard description={post.description} created_at={new Date(post.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })} username={post.user.name} picture_url={post.picture_url} />
         </div>
       ))}
-      <PostCard />
     </div>
   );
 }

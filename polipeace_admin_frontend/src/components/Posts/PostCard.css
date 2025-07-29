@@ -1,11 +1,11 @@
 .postcard {
-  width: 70%;
+  width: 50%;
   padding: 15px;
   border-radius: 10px;
   border-top-right-radius: 50px;
   border: 1px solid black;
   border-top: 30px solid #4B1F3E;
-  box-shadow: 25px 16px 17px 10px #4B1F3E,
+  box-shadow: 5px 6px 7px 1px #4B1F3E,
 }
 
 .post_header {
