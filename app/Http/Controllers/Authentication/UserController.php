@@ -49,8 +49,8 @@ class UserController extends Controller
                     "name" => $user->name,
                     "email" => $user->email,
                     "age" => $user->age,
-                    "sex" => $user->gender,
-                    "party_affiliation" => $user->polipartyAffiliation,
+                    "sex" => $user->sex,
+                    "party_affiliation" => $user->party_affiliation,
                 ],
                 "token" => $accessToken
             ]);
