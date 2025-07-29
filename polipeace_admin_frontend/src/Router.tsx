@@ -16,6 +16,7 @@ import Announcement from "./views/Announcement";
 import AnnouncementForm from "./views/announcementForm";
 import Votes from "./views/Votes";
 import VotesForm from "./views/votesForm";
+import Posts from "./views/Posts";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -33,6 +34,8 @@ const router = createBrowserRouter([
       { path: 'announcements/new', element: <AnnouncementForm />},
       { path: 'votes', element: <Votes />},
       { path: 'votes/new', element: <VotesForm />},
+      { path: 'posts', element: <Posts />},
+      { path: 'posts/new', element: <VotesForm />},
       { path: '*', element: <NotFound />}
     ]
   },

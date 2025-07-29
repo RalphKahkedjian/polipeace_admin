@@ -25,14 +25,18 @@ class PostController extends Controller
             'picture_url' => $pictureURL
         ]);
 
+        $post->load('user');
+
         return response()->json([
             "status" => true,
-            "post" => $post
+            "post" => $post,
+            "username" => $post->user->name
         ]);
     }
     
     public function index() {
         $post = Post::all();
+        $post->load('user');
         if(!$post->isEmpty()) {
             return response()->json([
                 "message" => true,

@@ -45,7 +45,8 @@ Route::delete('/Announcement/Delete', [AnnouncementController::class, 'deleteAnn
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/posts', [PostController::class, 'store']);
-    Route::get('/posts', [PostController::class, 'index']);
 });
+
+    Route::get('/posts', [PostController::class, 'index']);
 
 Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
