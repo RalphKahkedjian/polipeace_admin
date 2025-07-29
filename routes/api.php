@@ -5,6 +5,7 @@ use App\Http\Controllers\Authentication\AdminController;
 use App\Http\Controllers\Authentication\UserController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Meeting\MeetingController;
+use App\Http\Controllers\Post\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client as GuzzleClient;
@@ -42,8 +43,9 @@ Route::post('/Announcement/Post', [AnnouncementController::class, 'postAnnouncem
 Route::get('/Announcement/Show', [AnnouncementController::class, 'getAnnouncement']);
 Route::delete('/Announcement/Delete', [AnnouncementController::class, 'deleteAnnouncement']);
 
-Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts', [PostController::class, 'index']);
 });
+
+Route::post('/chatbot', [ChatbotController::class, 'sendChatbot']);
